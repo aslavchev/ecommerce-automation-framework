@@ -1,0 +1,190 @@
+# E-Commerce Automation Framework - .gitignore
+# Java + Maven + Selenium + TestNG + Allure Reports
+
+# ============================================
+# Compiled Files & Build Outputs
+# ============================================
+target/
+build/
+out/
+bin/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# ============================================
+# IDE - IntelliJ IDEA
+# ============================================
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+
+# ============================================
+# IDE - Eclipse
+# ============================================
+.classpath
+.project
+.settings/
+.metadata/
+
+# ============================================
+# IDE - VS Code
+# ============================================
+.vscode/
+*.code-workspace
+
+# ============================================
+# Maven
+# ============================================
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# ============================================
+# Test Reports & Screenshots
+# ============================================
+# Allure and TestNG reports - regenerated on each run
+test-output/
+screenshots/
+reports/
+allure-results/
+allure-report/
+*.png
+*.jpg
+
+# Allow documentation images (if you add them later)
+!docs/images/*.png
+!docs/images/*.jpg
+!README-images/
+
+# ============================================
+# Logs
+# ============================================
+*.log
+logs/
+*.log.*
+log/
+
+# ============================================
+# OS Generated Files
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================================
+# Selenium & WebDriver
+# ============================================
+# WebDriverManager handles drivers automatically
+drivers/
+chromedriver
+chromedriver.exe
+geckodriver
+geckodriver.exe
+msedgedriver.exe
+operadriver
+operadriver.exe
+
+# ============================================
+# Environment & Configuration
+# ============================================
+# Ignore local environment configs but keep templates
+*.env
+.env
+.env.local
+config.properties
+!config.properties.template
+application.properties
+!application.properties.template
+
+# ============================================
+# Credentials & Secrets (CRITICAL)
+# ============================================
+# NEVER commit credentials, API keys, passwords
+credentials.json
+secrets.json
+*.key
+*.pem
+*.p12
+.credentials/
+auth/
+
+# ============================================
+# Test Data (Sensitive)
+# ============================================
+# Ignore test data with real user information
+test-data/users.csv
+test-data/credentials.csv
+# Keep sample/template test data
+!test-data/sample-*.csv
+!test-data/template-*.csv
+
+# ============================================
+# Temporary Files
+# ============================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.cache/
+
+# ============================================
+# Docker
+# ============================================
+# Ignore Docker volumes and local overrides
+docker-compose.override.yml
+.docker/
+
+# ============================================
+# CI/CD
+# ============================================
+# GitHub Actions artifacts are already in cloud
+.github/workflows/artifacts/
+
+# ============================================
+# Coverage Reports (Optional)
+# ============================================
+coverage/
+*.coverage
+.nyc_output/
+jacoco.xml
+*.exec
+
+# ============================================
+# Node Modules (if using any npm tools for reporting)
+# ============================================
+node_modules/
+package-lock.json
+yarn.lock
+
+# ============================================
+# Allow Important Files
+# ============================================
+# Explicitly include these important files
+!README.md
+!LICENSE
+!.github/workflows/*.yml
+!Dockerfile
+!docker-compose.yml
+!pom.xml
+!src/
+!docs/*.md
+!docs/decisions/*.md
