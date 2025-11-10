@@ -16,7 +16,7 @@ This framework demonstrates comprehensive test automation for e-commerce applica
 - **Test Strategy**: Risk-based test selection following Test Pyramid principles
 - **Architecture**: Page Object Model for maintainability and scalability
 - **Tech Stack**: Java 21, Selenium 4, TestNG, REST Assured
-- **DevOps**: Docker containerization and GitHub Actions CI/CD (coming in Weeks 5-6)
+- **DevOps**: GitHub Actions CI/CD integration with automated test execution
 
 Built by a QA professional with 18 years of testing expertise, this framework combines strategic test planning with modern automation implementation.
 
@@ -28,13 +28,13 @@ Built by a QA professional with 18 years of testing expertise, this framework co
 |-----------|-----------|---------|
 | **Language** | Java | 21 |
 | **Build Tool** | Maven | 3.9+ |
-| **UI Automation** | Selenium WebDriver | 4.15.0 |
-| **Test Framework** | TestNG | 7.8.0 |
-| **API Testing** | REST Assured | 5.4.0 |
-| **Reporting** | Allure Report | 2.25.0 |
-| **Driver Management** | WebDriverManager | 5.6.2 |
-| **Containerization** | Docker | (Week 5) |
-| **CI/CD** | GitHub Actions | (Week 6) |
+| **UI Automation** | Selenium WebDriver | 4.38.0 |
+| **Test Framework** | TestNG | 7.11.0 |
+| **API Testing** | REST Assured | 5.5.6 |
+| **Reporting** | Allure Report | 2.29.0 |
+| **Driver Management** | WebDriverManager | 6.3.2 |
+| **CI/CD** | GitHub Actions | In Progress |
+| **Containerization** | Docker | Planned |
 
 ---
 
@@ -43,12 +43,12 @@ Built by a QA professional with 18 years of testing expertise, this framework co
 ```
 ecommerce-automation-framework/
 ├── src/
-│   ├── main/java/io/github/[username]/
+│   ├── main/java/io/github/aslavchev/
 │   │   ├── pages/              # Page Object Model classes
 │   │   ├── api/                # API testing models
 │   │   └── utils/              # Shared utilities
 │   └── test/
-│       ├── java/io/github/[username]/
+│       ├── java/io/github/aslavchev/
 │       │   ├── base/           # Base test classes
 │       │   └── tests/
 │       │       ├── ui/         # UI test cases
@@ -57,11 +57,11 @@ ecommerce-automation-framework/
 │           ├── config/         # Configuration files
 │           └── testdata/       # Test data files
 ├── pom.xml                     # Maven configuration
-├── docker/                     # Docker configuration (Week 5)
-├── .github/workflows/          # CI/CD pipelines (Week 6)
+├── .github/workflows/          # CI/CD pipelines
+├── docker/                     # Docker configuration
 └── docs/                       # Documentation
-    ├── test-strategy.md        # Test strategy document
-    └── decisions/              # Architecture Decision Records
+    ├── architecture/           # Architecture Decision Records
+    └── test-strategy.md        # Test strategy document
 ```
 
 ---
@@ -139,7 +139,7 @@ Allure Reports (interactive HTML) can be generated and viewed with:
 mvn allure:serve
 ```
 
-Reports will be available at `target/allure-results/` (Week 4+).
+Allure results are automatically generated at `target/allure-results/` after each test execution.
 
 ---
 
@@ -150,7 +150,7 @@ Reports will be available at `target/allure-results/` (Week 4+).
 All UI interactions are encapsulated in Page Object classes following the Single Responsibility Principle:
 
 ```java
-package io.github.[username].pages;
+package io.github.aslavchev.pages;
 
 public class LoginPage {
     // Locators
@@ -171,7 +171,7 @@ public class LoginPage {
 REST Assured is used for API validation with request/response models:
 
 ```java
-package io.github.[username].api;
+package io.github.aslavchev.api;
 
 @Test
 public void testUserRegistration() {
@@ -190,9 +190,9 @@ public void testUserRegistration() {
 
 ## 📚 Documentation
 
-- **[Test Strategy](docs/test-strategy.md)**: Comprehensive test approach and rationale
-- **[Architecture Decisions](docs/decisions/)**: ADRs documenting key technical choices
-- **[Setup Guide](docs/setup.md)**: Detailed environment setup (Week 2+)
+- **[Architecture Decisions](docs/architecture/)**: ADRs documenting key technical choices
+- **[Test Strategy](docs/test-strategy.md)**: Comprehensive test approach and rationale (planned)
+- **[Setup Guide](docs/setup.md)**: Detailed environment setup (planned)
 
 ---
 
@@ -208,24 +208,52 @@ This framework was built as part of a transition from manual QA (18 years) to te
 
 ---
 
-## 📈 Roadmap
+## 📈 Development Roadmap
 
-**Week 2-4**: Core framework implementation
-- [x] Maven project setup
-- [ ] Page Object Model implementation
-- [ ] UI test suite (Selenium)
-- [ ] API test suite (REST Assured)
-- [ ] Test reporting (Extent Reports)
+### ✅ **Phase 1: Foundation (Weeks 1-2) - COMPLETE**
+- [x] Maven project setup with modern tech stack
+- [x] Page Object Model foundation (BaseTest, BasePage)
+- [x] First page object implementation (LoginPage)
+- [x] Login test suite (2 tests passing, 100% pass rate)
+- [x] Allure reporting configured and generating
+- [x] Architecture Decision Records (ADR-001, ADR-003)
 
-**Week 5-6**: DevOps integration
-- [ ] Docker containerization
-- [ ] GitHub Actions CI/CD pipeline
-- [ ] Automated test execution on commit
+### 🚧 **Phase 2: CI/CD Infrastructure (Week 3) - IN PROGRESS**
+- [ ] GitHub Actions workflow for automated test execution
+- [ ] Headless browser configuration
+- [ ] Allure report publishing to GitHub Pages
+- [ ] Environment variable configuration for credentials
+- [ ] Build status badges
 
-**Week 7**: Documentation & polish
-- [ ] Complete test strategy document
-- [ ] Architecture Decision Records
-- [ ] Framework design documentation
+### **Phase 3: Test Coverage Expansion (Week 4)**
+- [ ] ProductPage, CartPage, CheckoutPage objects
+- [ ] 6-8 new test scenarios across user journeys
+- [ ] End-to-end critical path coverage
+
+### **Phase 4: Data-Driven Testing (Week 5)**
+- [ ] TestNG DataProvider implementation
+- [ ] CSV/JSON test data management
+- [ ] Parameterized test scenarios
+
+### **Phase 5: API Testing Integration (Week 6)**
+- [ ] REST Assured test suite
+- [ ] API + UI combined test scenarios
+- [ ] Full-stack QA demonstration
+
+### **Phase 6: Advanced CI/CD (Weeks 7-8)**
+- [ ] Parallel test execution configuration
+- [ ] Cross-browser testing (Chrome, Firefox)
+- [ ] Test retry mechanisms for flaky tests
+
+### **Phase 7: Containerization (Weeks 9-10)**
+- [ ] Docker test execution environment
+- [ ] Selenium Grid setup
+- [ ] Scalable infrastructure
+
+### **Phase 8: Polish & Completion (Weeks 11-12)**
+- [ ] Performance optimization
+- [ ] Comprehensive documentation updates
+- [ ] Final portfolio review
 
 ---
 
@@ -251,6 +279,6 @@ Special thanks to the open-source community for excellent tools like Selenium, T
 
 ---
 
-**Status**: 🚧 Work in Progress (Week 1 - Project Setup)
+**Status**: ✅ Week 2 Complete | 🚧 Week 3 In Progress (CI/CD Integration)
 
-**Last Updated**: November 2025
+**Last Updated**: November 10, 2025
