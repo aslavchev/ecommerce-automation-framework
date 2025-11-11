@@ -31,11 +31,23 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-
         ChromeOptions options = new ChromeOptions();
+
+        // Detect CI environment (GitHub Actions sets CI=true)
+        boolean isCI = System.getenv("CI") != null;
+
+        if (isCI) {
+            // CI-specific configuration (headless mode for servers without display)
+            options.addArguments("--headless=new");           // New headless mode (Selenium 4.8+)
+            options.addArguments("--no-sandbox");              // Required for CI environments
+            options.addArguments("--disable-dev-shm-usage");   // Overcome limited shared memory
+            options.addArguments("--disable-gpu");             // Disable GPU (not available in CI)
+            options.addArguments("--window-size=1920,1080");   // Set consistent viewport size
+        }
+
+        // Common options for both local and CI
         options.addArguments("--disable-notifications");
         options.addArguments("--start-maximized");
-        // options.addArguments("--headless"); // Enable for CI/CD
 
         driver = new ChromeDriver(options);
 
