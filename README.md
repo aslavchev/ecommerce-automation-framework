@@ -1,6 +1,6 @@
 # E-Commerce Test Automation Framework
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Build Status](https://github.com/aslavchev/ecommerce-automation-framework/actions/workflows/test-automation.yml/badge.svg)
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![Selenium](https://img.shields.io/badge/Selenium-4.15.0-green)
 ![TestNG](https://img.shields.io/badge/TestNG-7.8.0-red)
