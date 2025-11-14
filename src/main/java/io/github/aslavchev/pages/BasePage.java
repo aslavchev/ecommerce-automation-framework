@@ -26,6 +26,8 @@ public class BasePage {
     private static final int DEFAULT_TIMEOUT_SECONDS = 10;
 
 
+    protected static final String BASE_URL = "https://automationexercise.com";
+
     /**
      * Constructor - receives WebDriver instance (Dependency Injection pattern)
      *

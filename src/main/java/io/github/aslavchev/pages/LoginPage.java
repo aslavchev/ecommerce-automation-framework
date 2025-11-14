@@ -22,8 +22,6 @@ public class LoginPage extends BasePage {
     private By errorMessage =  By.xpath("//p[normalize-space()='Your email or password is incorrect!']");
 
 
-    private static final String LOGIN_URL = "https://automationexercise.com/login";
-
     /**
      * Constructor - receives WebDriver instance (Dependency Injection pattern)
      *
@@ -40,7 +38,7 @@ public class LoginPage extends BasePage {
      * @return LoginPage for method chaining
      */
     public LoginPage navigateToLogin() {
-        navigateTo(LOGIN_URL);  // BasePage method
+        navigateTo(BASE_URL + "/login");  // BasePage method
         return this;  // Return this for method chaining
     }
 
