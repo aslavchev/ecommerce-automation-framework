@@ -20,6 +20,7 @@ public class ProductsPage extends BasePage {
     private By searchInputLocator = By.id("search_product");
     private By searchButtonLocator = By.id("submit_search");
     private By productNamesLocator = By.cssSelector(".productinfo.text-center p");
+    private By viewProductButtonsLocator = By.cssSelector("a[href*='/product_details/']");
 
     // Category sidebar locators
     private By categoryHeadingLocator = By.cssSelector(".left-sidebar h2");
@@ -151,5 +152,21 @@ public class ProductsPage extends BasePage {
     public boolean isCategoryPageDisplayed(String expectedCategory) {
         String heading = getCategoryHeading();
         return heading.toUpperCase().contains(expectedCategory.toUpperCase());
+    }
+
+    /**
+     * Opens the first product's details page
+     *
+     * @return ProductDetailsPage instance for the opened product
+     */
+    public ProductDetailsPage openFirstProductDetails() {
+        removeAdOverlays();         // 1. remove ads
+        removeGoogleAds();          // 2. remove google ads
+
+        List<WebElement> viewButtons = driver.findElements(viewProductButtonsLocator);
+        if (!viewButtons.isEmpty()) {
+            viewButtons.get(0).click();
+        }
+        return new ProductDetailsPage(driver);
     }
 }

@@ -2,8 +2,8 @@
 
 ![Build Status](https://github.com/aslavchev/ecommerce-automation-framework/actions/workflows/test-automation.yml/badge.svg)
 ![Java](https://img.shields.io/badge/Java-21-orange)
-![Selenium](https://img.shields.io/badge/Selenium-4.15.0-green)
-![TestNG](https://img.shields.io/badge/TestNG-7.8.0-red)
+![Selenium](https://img.shields.io/badge/Selenium-4.38.0-green)
+![TestNG](https://img.shields.io/badge/TestNG-7.11.0-red)
 
 **Strategic test automation framework for e-commerce testing demonstrating production-ready automation practices.**
 
@@ -218,17 +218,17 @@ This framework was built as part of a transition from manual QA (18 years) to te
 - [x] Allure reporting configured and generating
 - [x] Architecture Decision Records (ADR-001, ADR-003)
 
-### 🚧 **Phase 2: CI/CD Infrastructure (Week 3) - IN PROGRESS**
-- [ ] GitHub Actions workflow for automated test execution
-- [ ] Headless browser configuration
-- [ ] Allure report publishing to GitHub Pages
-- [ ] Environment variable configuration for credentials
-- [ ] Build status badges
+### ✅ **Phase 2: CI/CD Infrastructure (Week 3) - COMPLETE**
+- [x] GitHub Actions workflow for automated test execution
+- [x] Headless browser configuration
+- [x] Allure report publishing to GitHub Pages
+- [x] Environment variable configuration for credentials
+- [x] Build status badges
 
-### **Phase 3: Test Coverage Expansion (Week 4)**
-- [ ] ProductPage, CartPage, CheckoutPage objects
-- [ ] 6-8 new test scenarios across user journeys
-- [ ] End-to-end critical path coverage
+### 🚧 **Phase 3: Test Coverage Expansion (Week 4) - IN PROGRESS**
+- [x] ProductsPage, ProductDetailsPage objects (Journey 1: Product Discovery ✅)
+- [x] 4 test scenarios covering product browsing (Test Cases 8, 9, 18)
+- [ ] Additional journeys: Cart Management, Checkout Flow
 
 ### **Phase 4: Data-Driven Testing (Week 5)**
 - [ ] TestNG DataProvider implementation
@@ -279,6 +279,6 @@ Special thanks to the open-source community for excellent tools like Selenium, T
 
 ---
 
-**Status**: ✅ Week 2 Complete | 🚧 Week 3 In Progress (CI/CD Integration)
+**Status**: ✅ Week 3 Complete | 🚧 Week 4 In Progress (Journey 1: Product Discovery ✅)
 
-**Last Updated**: November 10, 2025
+**Last Updated**: November 16, 2025

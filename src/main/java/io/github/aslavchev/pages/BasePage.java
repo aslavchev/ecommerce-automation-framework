@@ -1,6 +1,7 @@
 package io.github.aslavchev.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -134,5 +135,22 @@ public class BasePage {
     protected String getPageTitle() {
         return driver.getTitle();
     }
+
+    protected void removeAdOverlays() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(
+                "document.querySelectorAll('[id^=\"ftdiv\"], [id^=\"ftAdMarker\"], iframe[src*=\"flashtalking\"], iframe[src*=\"ad\"]')" +
+                        ".forEach(e => e.remove());"
+        );
+    }
+
+    protected void removeGoogleAds() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        js.executeScript(
+                "document.querySelectorAll('[id^=\"aswift_\"], [id^=\"ad_position\"], iframe[src*=\"ads\"], iframe[id^=\"aswift_\"]').forEach(e => e.remove());"
+        );
+    }
+
 
 }
