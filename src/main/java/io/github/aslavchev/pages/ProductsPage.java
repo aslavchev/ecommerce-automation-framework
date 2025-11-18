@@ -3,6 +3,8 @@ package io.github.aslavchev.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +36,12 @@ public class ProductsPage extends BasePage {
 
     // Men subcategories
     private By menTshirtsSubcategoryLocator = By.cssSelector("a[href='/category_products/3']");
+
+    // Add to cart functionality (hover overlay)
+    private By productCardLocator = By.cssSelector(".product-image-wrapper");
+    private By addToCartButtonLocator = By.cssSelector("a.add-to-cart");
+    private By continueShoppingButtonLocator = By.cssSelector(".modal-footer .btn-success");
+    private By viewCartModalLinkLocator = By.cssSelector(".modal-content a[href='/view_cart']");
 
     /**
      * Constructor - receives WebDriver instance (Dependency Injection pattern)
@@ -168,5 +176,63 @@ public class ProductsPage extends BasePage {
             viewButtons.get(0).click();
         }
         return new ProductDetailsPage(driver);
+    }
+
+    /**
+     * Add product to cart by index (0-based)
+     * Why: TC-12 adds products from the products page using hover action
+     * <p>
+     * Implementation notes:
+     * - Must hover over product card to reveal the Add to Cart overlay
+     * - Uses card.findElement() to search WITHIN that specific card
+     * - This ensures clicking the correct button when adding 7th product (index=6)
+     */
+    public void addProductToCartByIndex(int index) {
+        removeAdOverlays();
+        removeGoogleAds();
+        removeConsentPopup();
+
+        List<WebElement> productCards = driver.findElements(productCardLocator);
+        if (index < productCards.size()) {
+            WebElement card = productCards.get(index);
+
+            // Scroll card into view first
+            scrollIntoView(card);
+
+            // Hover over this specific card to reveal overlay
+            Actions actions = new Actions(driver);
+            actions.moveToElement(card).perform();
+
+            // Find add button WITHIN this card's context and use JS click
+            WebElement addButton = card.findElement(addToCartButtonLocator);
+            jsClick(addButton);
+        }
+    }
+
+    /**
+     * Add first product to cart (convenience method)
+     * Why: Keeps test code clean for common case
+     */
+    public void addFirstProductToCart() {
+        addProductToCartByIndex(0);
+
+    }
+
+    public void clickContinueShopping() {
+        click(continueShoppingButtonLocator);
+    }
+
+    /**
+     * Click View Cart in modal
+     * Why: TC-12 clicks View Cart after adding products
+     * Returns: CartPage for fluent chaining
+     */
+    public CartPage clickViewCart() {
+
+        // Wait for modal to appear
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".modal-content a[href='/view_cart']")));
+
+        click(viewCartModalLinkLocator);
+        return new CartPage(driver);
     }
 }

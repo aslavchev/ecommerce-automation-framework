@@ -11,7 +11,7 @@ import java.time.Duration;
 
 /**
  * BasePage - Foundation for all Page Object classes
- *
+ * <p>
  * Architectural decisions:
  * - All page objects extend this class (DRY principle)
  * - Common wait strategies centralized here (no Thread.sleep in tests)
@@ -76,7 +76,7 @@ public class BasePage {
      * Clears field first to ensure clean state
      *
      * @param locator Element to type into
-     * @param text Text to enter
+     * @param text    Text to enter
      */
     protected void type(By locator, String text) {
         WebElement element = waitForElementVisible(locator);
@@ -136,6 +136,9 @@ public class BasePage {
         return driver.getTitle();
     }
 
+    /**
+     * Removes ad overlay elements from the page using JavaScript
+     */
     protected void removeAdOverlays() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript(
@@ -144,12 +147,44 @@ public class BasePage {
         );
     }
 
+    /**
+     * Removes Google ad elements from the page using JavaScript
+     */
     protected void removeGoogleAds() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         js.executeScript(
                 "document.querySelectorAll('[id^=\"aswift_\"], [id^=\"ad_position\"], iframe[src*=\"ads\"], iframe[id^=\"aswift_\"]').forEach(e => e.remove());"
         );
+    }
+    /**
+     * Remove consent popup dialogs
+     */
+    protected void removeConsentPopup() {
+        ((JavascriptExecutor) driver).executeScript(
+                "document.querySelectorAll('.fc-dialog, .fc-consent-root, .fc-dialog-overlay').forEach(e => e.remove());"
+        );
+    }
+
+    /**
+     * Scroll element into center of viewport
+     *
+     * @param element WebElement to scroll into view
+     */
+    protected void scrollIntoView(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center'});", element
+        );
+    }
+
+    /**
+     * Click element using JavaScript
+     * Bypasses Selenium's visibility checks
+     *
+     * @param element WebElement to click
+     */
+    protected void jsClick(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
 
