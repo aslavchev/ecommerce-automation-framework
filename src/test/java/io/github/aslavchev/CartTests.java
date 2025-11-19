@@ -16,16 +16,21 @@ public class CartTests extends BaseTest {
     @Test
     @Description("Test Case 12: Add product to cart and verify")
     public void testAddProductToCart() {
-        //Arrange
+        // Arrange
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.navigateProducts();
 
-        //Act
-        productsPage.addFirstProductToCart();
+        // Act
+        productsPage.addProductToCartByIndex(0);
+        productsPage.clickContinueShopping();
+        productsPage.addProductToCartByIndex(1);
         CartPage cartPage = productsPage.clickViewCart();
 
-        //Assert
-        Assert.assertTrue(cartPage.getCartItemCount() > 0, "Cart should contain at least one product");
+        // Assert - Verify both products are in cart with correct details
+        Assert.assertEquals(cartPage.getCartItemCount(), 2, "Cart should contain 2 products");
+        Assert.assertEquals(cartPage.getProductQuantities().size(), 2, "Should have 2 quantities");
+        Assert.assertEquals(cartPage.getProductPrices().size(), 2, "Should have 2 prices");
+        Assert.assertEquals(cartPage.getProductTotals().size(), 2, "Should have 2 totals");
     }
 
     @Test
@@ -60,6 +65,6 @@ public class CartTests extends BaseTest {
         cartPage.removeFirstProduct();
 
         //Assert
-        Assert.assertTrue(cartPage.isCartEmpty(),"Cart should be empty after removal");
+        Assert.assertTrue(cartPage.isCartEmpty(), "Cart should be empty after removal");
     }
 }

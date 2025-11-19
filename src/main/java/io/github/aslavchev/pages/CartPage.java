@@ -2,6 +2,10 @@ package io.github.aslavchev.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * CartPage - Page Object for Shopping Cart page
@@ -18,6 +22,9 @@ public class CartPage extends BasePage {
     private By productNameLocator = By.cssSelector(".cart_description h4 a");
     private By productQuantityLocator = By.cssSelector(".cart_quantity button");
     private By deleteButtonLocator = By.cssSelector(".cart_quantity_delete");
+    private By productPriceLocator = By.cssSelector(".cart_price p");
+    private By productTotalLocator = By.cssSelector(".cart_total p");
+
 
     // Checkout
 
@@ -90,4 +97,57 @@ public class CartPage extends BasePage {
         return getText(productNameLocator);
     }
 
+    /**
+     * Get all product names in cart
+     * @return List of product names
+     */
+    public List<String> getProductNames(){
+        List<WebElement> elements = driver.findElements(productNameLocator);
+        List<String > names = new ArrayList<>();
+        for (WebElement element : elements) {
+            names.add(element.getText());
+        }
+        return names;
+    }
+
+    /**
+     * Get all product prices in cart
+     * @return List of prices (e.g. "RS. 500")
+     */
+    public List<String> getProductPrices(){
+        List<WebElement> elements = driver.findElements(productPriceLocator);
+        List<String > prices = new ArrayList<>();
+        for (WebElement element : elements) {
+            prices.add(element.getText());
+        }
+        return prices;
+    }
+
+    /**
+     * Get all product quantities in cart
+     *
+     * @return List of quantities
+     */
+    public List<String> getProductQuantities() {
+        List<WebElement> elements = driver.findElements(productQuantityLocator);
+        List<String> quantities = new ArrayList<>();
+        for (WebElement element : elements) {
+            quantities.add(element.getText());
+        }
+        return quantities;
+    }
+
+    /**
+     * Get all product totals in cart
+     *
+     * @return List of totals
+     */
+    public List<String> getProductTotals() {
+        List<WebElement> elements = driver.findElements(productTotalLocator);
+        List<String> totals = new ArrayList<>();
+        for (WebElement element : elements) {
+            totals.add(element.getText());
+        }
+        return totals;
+    }
 }
