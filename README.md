@@ -44,24 +44,27 @@ Built by a QA professional with 18 years of testing expertise, this framework co
 ecommerce-automation-framework/
 ├── src/
 │   ├── main/java/io/github/aslavchev/
-│   │   ├── pages/              # Page Object Model classes
-│   │   ├── api/                # API testing models
-│   │   └── utils/              # Shared utilities
-│   └── test/
-│       ├── java/io/github/aslavchev/
-│       │   ├── base/           # Base test classes
-│       │   └── tests/
-│       │       ├── ui/         # UI test cases
-│       │       └── api/        # API test cases
-│       └── resources/
-│           ├── config/         # Configuration files
-│           └── testdata/       # Test data files
+│   │   └── pages/              # Page Object Model classes
+│   │       ├── BasePage.java   # Foundation for all page objects
+│   │       ├── LoginPage.java
+│   │       ├── ProductsPage.java, ProductDetailsPage.java
+│   │       ├── CartPage.java
+│   │       └── CheckoutPage.java, PaymentPage.java, OrderConfirmationPage.java
+│   └── test/java/io/github/aslavchev/
+│       ├── base/               # Base test classes
+│       │   └── BaseTest.java
+│       ├── e2e/                # End-to-end user journeys
+│       │   └── CheckoutTests.java
+│       ├── utils/              # Test utilities
+│       │   └── TestConfig.java # Secure credential management
+│       ├── LoginTests.java     # Feature tests (organized by feature)
+│       ├── ProductTests.java
+│       └── CartTests.java
+├── .env                        # Local credentials (gitignored)
 ├── pom.xml                     # Maven configuration
 ├── .github/workflows/          # CI/CD pipelines
-├── docker/                     # Docker configuration
 └── docs/                       # Documentation
-    ├── architecture/           # Architecture Decision Records
-    └── test-strategy.md        # Test strategy document
+    └── architecture/           # Architecture Decision Records
 ```
 
 ---
@@ -118,15 +121,34 @@ mvn test
 # Run all tests
 mvn test
 
-# Run specific test suite
+# Run by TestNG group (recommended)
+mvn test -Dgroups=smoke                 # Fast sanity checks (~2 min)
+mvn test -Dgroups=regression            # Full test suite (~5-10 min)
+mvn test -Dgroups=critical              # Critical business paths only
+mvn test -Dgroups=e2e                   # End-to-end user journeys
+
+# Run specific test class
 mvn test -Dtest=LoginTests
+mvn test -Dtest=e2e.CheckoutTests
 
 # Run with specific browser
 mvn test -Dbrowser=chrome
 
-# Generate test reports
-mvn surefire-report:report
+# Generate Allure report
+mvn clean test && mvn allure:serve
 ```
+
+### Test Organization
+
+Tests are organized using **TestNG groups** for flexible execution:
+
+| Group | Purpose | Tests | Run Time |
+|-------|---------|-------|----------|
+| `smoke` | Fast sanity checks | Login, Product navigation | ~2 min |
+| `regression` | Full test suite | All 10 tests | ~5-10 min |
+| `critical` | Business-critical paths | Login (valid), E2E Checkout | ~3 min |
+| `e2e` | Complete user journeys | Checkout flow | ~1 min |
+| `ui` | All UI tests | All current tests | ~5-10 min |
 
 ---
 
@@ -225,10 +247,15 @@ This framework was built as part of a transition from manual QA (18 years) to te
 - [x] Environment variable configuration for credentials
 - [x] Build status badges
 
-### 🚧 **Phase 3: Test Coverage Expansion (Week 4) - IN PROGRESS**
+### ✅ **Phase 3: Test Coverage Expansion (Weeks 4-5) - COMPLETE**
 - [x] ProductsPage, ProductDetailsPage objects (Journey 1: Product Discovery ✅)
-- [x] 4 test scenarios covering product browsing (Test Cases 8, 9, 18)
-- [ ] Additional journeys: Cart Management, Checkout Flow
+- [x] 4 test scenarios covering product browsing (Test Cases 8, 9, 18, 21)
+- [x] CartPage object and 3 cart management tests (Test Cases 12, 13, 17)
+- [x] CheckoutPage, PaymentPage, OrderConfirmationPage objects
+- [x] End-to-end checkout flow test (Test Case 16)
+- [x] TestNG groups for flexible test execution (smoke, regression, critical, e2e)
+- [x] TestConfig utility for secure credential management
+- [x] **10 UI tests passing** (9 feature + 1 E2E journey)
 
 ### **Phase 4: Data-Driven Testing (Week 5)**
 - [ ] TestNG DataProvider implementation
@@ -279,6 +306,8 @@ Special thanks to the open-source community for excellent tools like Selenium, T
 
 ---
 
-**Status**: ✅ Week 3 Complete | 🚧 Week 4 In Progress (Journey 1: Product Discovery ✅)
+**Status**: ✅ Phase 3 Complete (Weeks 4-5) | 🚧 Phase 4 Starting (Data-Driven Testing)
 
-**Last Updated**: November 16, 2025
+**Last Updated**: November 25, 2025
+
+**Current State**: 10 UI tests passing | TestNG groups implemented | E2E checkout flow validated
