@@ -2,6 +2,7 @@ package io.github.aslavchev;
 
 import io.github.aslavchev.base.BaseTest;
 import io.github.aslavchev.pages.LoginPage;
+import io.github.aslavchev.utils.TestConfig;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 
@@ -10,46 +11,37 @@ import static org.testng.Assert.*;
 
 public class LoginTests extends BaseTest {
 
-    @Test
+    @Test(groups = {"smoke", "regression", "critical", "ui"})
     @Description("Verify successful login displays correct username")
     public void testValidLogin() {
         // Arrange
-        String email = System.getenv("TEST_USER_EMAIL");
-        String password = System.getenv("TEST_USER_PASSWORD");
+        String email = TestConfig.email();
+        String password = TestConfig.password();
 
-        if (email == null || password == null) {
-            throw new IllegalStateException("TEST_USER_EMAIL and TEST_USER_PASSWORD env vars required");
-        }
+        // Act
+        LoginPage loginPage = new LoginPage(driver)
+                .navigateToLogin()
+                .login(email, password)
+                .waitForLoginSuccess();
 
-        LoginPage loginPage = new LoginPage(driver);
-
-        //Act
-        loginPage.navigateToLogin();
-        loginPage.login(email, password);
-        loginPage.waitForLoginSuccess();
-
-        //Assert
-        assertTrue(loginPage.isLoggedIn(), "User should be logged in - 'Logged in as' text should be visible");
-        assertEquals(loginPage.getLoggedInUsername(), "asl", "Logged in username should be 'asl'");
+        // Assert
+        assertTrue(loginPage.isLoggedIn());
+        assertEquals(loginPage.getLoggedInUsername(), "asl");
     }
 
-    @Test
+    @Test(groups = {"regression", "ui"})
     @Description("Verify error message for invalid credentials")
     public void testInvalidLogin() {
         // Arrange
-        String email = System.getenv("TEST_USER_EMAIL");
-        if (email == null) {
-            throw new IllegalStateException("TEST_USER_EMAIL env var required");
-        }
+        String email = TestConfig.email();
 
-        LoginPage loginPage = new LoginPage(driver);
+        // Act
+        LoginPage loginPage = new LoginPage(driver)
+                .navigateToLogin()
+                .login(email, "wrongpassword123")
+                .waitForErrorMessage();
 
-        //Act
-        loginPage.navigateToLogin();
-        loginPage.login(email, "wrongpassword");
-        loginPage.waitForErrorMessage();
-
-        //Assert
+        // Assert
         assertTrue(loginPage.isErrorMessageDisplayed());
         assertEquals(loginPage.getErrorMessage(), "Your email or password is incorrect!");
         assertFalse(loginPage.isLoggedIn());

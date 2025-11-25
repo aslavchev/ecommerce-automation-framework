@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class ProductTests extends BaseTest {
 
-    @Test
+    @Test(groups = {"smoke", "regression", "ui"})
     @Description("Test Case 8: Verify All Products page navigation")
     public void testNavigationToProductsPage() {
         //Arrange
@@ -23,7 +23,7 @@ public class ProductTests extends BaseTest {
                 "All products page should be displayed");
     }
 
-    @Test
+    @Test(groups = {"regression", "ui"})
     @Description("Test Case 9: Search products by keyword")
     public void testSearchProduct() {
         //Arrange
@@ -40,7 +40,7 @@ public class ProductTests extends BaseTest {
                 "Search results should contain products related to 'Dress'");
     }
 
-    @Test
+    @Test(groups = {"regression", "ui"})
     @Description("Test Case 18: Filter products by category (Women > Dress)")
     public void testFilterByCategory() {
         //Arrange
@@ -60,7 +60,7 @@ public class ProductTests extends BaseTest {
     }
 
 
-    @Test
+    @Test(groups = {"regression", "ui"})
     @Description("Test case 8: View product details page")
     public void testViewProductDetails() {
         //Arrange

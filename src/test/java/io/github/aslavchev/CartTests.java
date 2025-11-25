@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  * Test Cases: 12, 13, 17
  */
 public class CartTests extends BaseTest {
-    @Test
+    @Test(groups = {"regression", "ui"})
     @Description("Test Case 12: Add product to cart and verify")
     public void testAddProductToCart() {
         // Arrange
@@ -33,7 +33,7 @@ public class CartTests extends BaseTest {
         Assert.assertEquals(cartPage.getProductTotals().size(), 2, "Should have 2 totals");
     }
 
-    @Test
+    @Test(groups = {"regression", "ui"})
     @Description("Test Case 13: Verify product quantity in cart")
     public void testVerifyProductQuantityInCart() {
         //Arrange
@@ -50,7 +50,7 @@ public class CartTests extends BaseTest {
         Assert.assertEquals(actualQuantity, String.valueOf(expectedQuantity), "Product quantity should be " + expectedQuantity);
     }
 
-    @Test
+    @Test(groups = {"regression", "ui"})
     @Description("Test Case 17: Remove product from cart")
     public void testRemoveProductFromCart() {
         //Arrange
