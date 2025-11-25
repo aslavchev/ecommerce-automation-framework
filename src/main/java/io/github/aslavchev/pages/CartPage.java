@@ -24,6 +24,7 @@ public class CartPage extends BasePage {
     private By deleteButtonLocator = By.cssSelector(".cart_quantity_delete");
     private By productPriceLocator = By.cssSelector(".cart_price p");
     private By productTotalLocator = By.cssSelector(".cart_total p");
+    private By checkoutButtonLocator = By.cssSelector(".check_out");
 
 
     // Checkout
@@ -149,5 +150,9 @@ public class CartPage extends BasePage {
             totals.add(element.getText());
         }
         return totals;
+    }
+
+    public void clickProceedToCheckout(){
+        click(checkoutButtonLocator);
     }
 }

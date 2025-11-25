@@ -47,10 +47,11 @@ public class LoginPage extends BasePage {
      * @param email User email
      * @param password User password
      */
-    public void login(String email, String password) {
+    public LoginPage login(String email, String password) {
         type(emailField, email);
         type(passwordField, password);
         click(loginButton);
+        return this;
     }
 
     public boolean isLoggedIn() {
@@ -65,16 +66,18 @@ public class LoginPage extends BasePage {
      * Wait for successful login completion
      * Call after login() for positive scenarios
      */
-    public void waitForLoginSuccess() {
+    public LoginPage waitForLoginSuccess() {
         waitForElementVisible(loggedInText);  // Uses BasePage wait method
+        return this;
     }
 
     /**
      * Wait for error message after failed login
      * Call after login() for negative scenarios
      */
-    public void waitForErrorMessage() {
+    public LoginPage waitForErrorMessage() {
         waitForElementVisible(errorMessage);
+        return this;
     }
 
     public String getErrorMessage() {

@@ -209,13 +209,28 @@ public class ProductsPage extends BasePage {
         }
     }
 
+    public void addProductToCartByName(String productName) {
+        removeAdOverlays();
+        removeGoogleAds();
+        removeConsentPopup();
+
+        By cardLocator = By.xpath("//p[normalize-space()='" + productName + "']" +
+                "/ancestor::div[contains(@class,'product-image-wrapper')]");
+
+        WebElement card = waitForElementVisible(cardLocator);
+        scrollIntoView(card);
+        new Actions(driver).moveToElement(card).perform();
+        jsClick(card.findElement(By.cssSelector("a.add-to-cart")));
+    }
+
+
     /**
      * Add first product to cart (convenience method)
      * Why: Keeps test code clean for common case
      */
     public void addFirstProductToCart() {
-        addProductToCartByIndex(0);
-
+//        addProductToCartByIndex(0);
+        addProductToCartByName("Blue Top");
     }
 
     public void clickContinueShopping() {
