@@ -187,5 +187,30 @@ public class BasePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
+    /**
+     * Gets text of a child element inside a given parent element.
+     *
+     * @param parent By locator of the container element
+     * @param child By locator of the nested element
+     * @return Trimmed text value of the nested element
+     */
+    protected String getNestedText(By parent, By child) {
+        WebElement parentEl = waitForElementVisible(parent);
+        WebElement childEl = parentEl.findElement(child);
+        return childEl.getText().trim();
+    }
+
+    /**
+     * Returns the trimmed text of a child element at a specific index inside a parent element.
+     *
+     * @param parent Locator of the parent container
+     * @param child Locator of the repeated child elements
+     * @param index Zero-based index of the child element
+     * @return Trimmed text of the child element
+     */
+    protected String getNestedTextFromList(By parent, By child, int index) {
+        WebElement parentEl = waitForElementVisible(parent);
+        return parentEl.findElements(child).get(index).getText().trim();
+    }
 
 }
