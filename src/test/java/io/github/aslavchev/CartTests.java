@@ -6,6 +6,7 @@ import io.github.aslavchev.pages.ProductDetailsPage;
 import io.github.aslavchev.pages.ProductsPage;
 import io.qameta.allure.Description;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
@@ -13,13 +14,11 @@ import org.testng.annotations.Test;
  * Test Cases: 12, 13, 17
  */
 public class CartTests extends BaseTest {
-    @Test(groups = {"regression", "ui"})
-    @Description("Test Case 12: Add product to cart and verify")
-    public void testAddProductToCart() {
+    @Test(groups = {"regression", "ui"}, dataProvider = "productData")
+    @Description("Test Case 12: Add product to cart and verify (Data-Driven)")
+    public void testAddProductToCart(String testName, String product1, String product2) {
         // Arrange
-        String product1 = "Blue Top";
-        String product2 = "Men Tshirt";
-
+        // Products are now passed as parameters from DataProvider
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.navigateProducts();
 
@@ -73,5 +72,18 @@ public class CartTests extends BaseTest {
 
         //Assert
         Assert.assertTrue(cartPage.isCartEmpty(), "Cart should be empty after removal");
+    }
+
+    // ==================================
+    // 🔽 DATA PROVIDER AT THE BOTTOM 🔽
+    // ==================================
+    @DataProvider(name = "productData")
+    public Object[][] getProductData() {
+        return new Object[][] {
+                // testName, product1, product2
+                { "Blue Top and Men Tshirt", "Blue Top", "Men Tshirt" },
+                { "Blue Top and Sleeveless Dress", "Blue Top", "Sleeveless Dress" },
+                { "Men Tshirt and Winter Top", "Men Tshirt", "Winter Top" }
+        };
     }
 }
