@@ -4,6 +4,7 @@ import io.github.aslavchev.base.BaseTest;
 import io.github.aslavchev.pages.*;
 import io.github.aslavchev.utils.TestConfig;
 import io.qameta.allure.Description;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,18 +17,20 @@ public class CheckoutTests extends BaseTest {
     private static final String EXPECTED_COUNTRY = "Australia";
     private static final String EXPECTED_PHONE = "+61 111 222 333d";
 
-    // ===== TEST DATA: EXPECTED PRODUCT VALUES =====
-    private static final String EXPECTED_PRODUCT_NAME = "Blue Top";
-    private static final String EXPECTED_PRODUCT_PRICE = "Rs. 500";
-    private static final String EXPECTED_PRODUCT_QUANTITY = "1";
-
-
-    @Test(groups = {"e2e", "regression", "critical", "ui", "slow"})
-    @Description("Test Case 16: Place Order: Login before Checkout")
-    public void testPlaceOrderLogInBeforeCheckout() {
+    @Test(groups = {"e2e", "regression", "critical", "ui", "slow"}, dataProvider = "checkoutData")
+    @Description("Test Case 16: Place Order: Login before Checkout (Data-Driven)")
+    public void testPlaceOrderLogInBeforeCheckout(String testName,
+                                                  String productName,
+                                                  String expectedPrice,
+                                                  String cardName,
+                                                  String cardNumber,
+                                                  String cvc,
+                                                  String expiryMonth,
+                                                  String expiryYear) {
         // Arrange
         String email = TestConfig.email();
         String password = TestConfig.password();
+        String expectedQuantity = "1";
 
         SoftAssert soft = new SoftAssert();
 
@@ -40,7 +43,7 @@ public class CheckoutTests extends BaseTest {
         // ===== ACT: ADD PRODUCT TO CART =====
         new ProductsPage(driver)
                 .navigateProducts()
-                .addProductToCartByName("Blue Top");
+                .addProductToCartByName(productName);
 
         // ===== ACT: PROCEED TO CHECKOUT =====
         CartPage cartPage = new ProductsPage(driver).clickViewCart();
@@ -92,11 +95,11 @@ public class CheckoutTests extends BaseTest {
         String actualOverallTotal = checkoutPage.getOverallTotal();
 
         // Verify product details
-        soft.assertEquals(actualProductName, EXPECTED_PRODUCT_NAME, "Product: Name");
-        soft.assertEquals(actualProductPrice, EXPECTED_PRODUCT_PRICE, "Product: Unit Price");
-        soft.assertEquals(actualProductQuantity, EXPECTED_PRODUCT_QUANTITY, "Product: Quantity");
-        soft.assertEquals(actualProductTotal, EXPECTED_PRODUCT_PRICE, "Product: Total");
-        soft.assertEquals(actualOverallTotal, EXPECTED_PRODUCT_PRICE, "Order: Overall Total");
+        soft.assertEquals(actualProductName, productName, "Product: Name");
+        soft.assertEquals(actualProductPrice, expectedPrice, "Product: Unit Price");
+        soft.assertEquals(actualProductQuantity, expectedQuantity, "Product: Quantity");
+        soft.assertEquals(actualProductTotal, expectedPrice, "Product: Total");
+        soft.assertEquals(actualOverallTotal, expectedPrice, "Order: Overall Total");
 
         // ===== ACT: PLACE ORDER =====
         checkoutPage
@@ -106,7 +109,7 @@ public class CheckoutTests extends BaseTest {
 
         /// ===== ACT: ENTER PAYMENT DETAILS =====
         OrderConfirmationPage confirmation = new PaymentPage(driver)
-                .enterPaymentDetails("Automation Test User", "1111222233334444", "123", "12", "2030")
+                .enterPaymentDetails(cardName, cardNumber, cvc, expiryMonth, expiryYear)
                 .clickPayAndConfirm();
 
         // ===== ASSERT: VERIFY ORDER CONFIRMATION =====
@@ -116,5 +119,19 @@ public class CheckoutTests extends BaseTest {
 
         // Execute all soft assertions
         soft.assertAll();
+    }
+
+    // ==================================
+    // 🔽 DATA PROVIDER AT THE BOTTOM 🔽
+    // ==================================
+    @DataProvider(name = "checkoutData")
+    public Object[][] getCheckoutData() {
+        return new Object[][] {
+                {"Blue Top Checkout", "Blue Top", "Rs. 500",
+                        "John Doe",  "4532015112830366", "123", "12", "2030"},
+
+                {"Dress Checkout", "Sleeveless Dress", "Rs. 1000",
+                        "Jane Smith", "4539290044042820", "456", "03", "2028"}
+        };
     }
 }
