@@ -1,8 +1,10 @@
 package io.github.aslavchev;
 
 import io.github.aslavchev.base.BaseTest;
+import io.github.aslavchev.dataproviders.ProductDataProvider;
 import io.github.aslavchev.pages.*;
 import io.github.aslavchev.utils.TestConfig;
+import io.github.aslavchev.utils.TestDataReader;
 import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -126,12 +128,8 @@ public class CheckoutTests extends BaseTest {
     // ==================================
     @DataProvider(name = "checkoutData")
     public Object[][] getCheckoutData() {
-        return new Object[][] {
-                {"Blue Top Checkout", "Blue Top", "Rs. 500",
-                        "John Doe",  "4532015112830366", "123", "12", "2030"},
-
-                {"Dress Checkout", "Sleeveless Dress", "Rs. 1000",
-                        "Jane Smith", "4539290044042820", "456", "03", "2028"}
-        };
+        return TestDataReader.readCheckoutPaymentData(
+                "checkout-payment.csv",
+                ProductDataProvider::getProductPrice);
     }
 }

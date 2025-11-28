@@ -1,6 +1,7 @@
 package io.github.aslavchev;
 
 import io.github.aslavchev.base.BaseTest;
+import io.github.aslavchev.dataproviders.ProductDataProvider;
 import io.github.aslavchev.pages.CartPage;
 import io.github.aslavchev.pages.ProductDetailsPage;
 import io.github.aslavchev.pages.ProductsPage;
@@ -79,11 +80,6 @@ public class CartTests extends BaseTest {
     // ==================================
     @DataProvider(name = "productData")
     public Object[][] getProductData() {
-        return new Object[][] {
-                // testName, product1, product2
-                { "Blue Top and Men Tshirt", "Blue Top", "Men Tshirt" },
-                { "Blue Top and Sleeveless Dress", "Blue Top", "Sleeveless Dress" },
-                { "Men Tshirt and Winter Top", "Men Tshirt", "Winter Top" }
-        };
+        return ProductDataProvider.getProductPairs();
     }
 }
