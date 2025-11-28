@@ -17,17 +17,24 @@ public class CartTests extends BaseTest {
     @Description("Test Case 12: Add product to cart and verify")
     public void testAddProductToCart() {
         // Arrange
+        String product1 = "Blue Top";
+        String product2 = "Men Tshirt";
+
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.navigateProducts();
 
         // Act
-        productsPage.addProductToCartByIndex(0);
+        productsPage.addProductToCartByName(product1);
         productsPage.clickContinueShopping();
-        productsPage.addProductToCartByIndex(1);
+        productsPage.addProductToCartByName(product2);
         CartPage cartPage = productsPage.clickViewCart();
+
 
         // Assert - Verify both products are in cart with correct details
         Assert.assertEquals(cartPage.getCartItemCount(), 2, "Cart should contain 2 products");
+        Assert.assertTrue(cartPage.getProductNames().contains(product1), "Cart should contain " + product1);
+        Assert.assertTrue(cartPage.getProductNames().contains(product2), "Cart should contain " + product2);
+
         Assert.assertEquals(cartPage.getProductQuantities().size(), 2, "Should have 2 quantities");
         Assert.assertEquals(cartPage.getProductPrices().size(), 2, "Should have 2 prices");
         Assert.assertEquals(cartPage.getProductTotals().size(), 2, "Should have 2 totals");

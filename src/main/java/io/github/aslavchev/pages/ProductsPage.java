@@ -186,6 +186,9 @@ public class ProductsPage extends BasePage {
      * - Must hover over product card to reveal the Add to Cart overlay
      * - Uses card.findElement() to search WITHIN that specific card
      * - This ensures clicking the correct button when adding 7th product (index=6)
+     * <p>
+     * @deprecated Use {@link #addProductToCartByName(String)} instead for better maintainability.
+     *             Index-based selection is fragile and breaks when product catalog order changes.
      */
     public void addProductToCartByIndex(int index) {
         removeAdOverlays();
