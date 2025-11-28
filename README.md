@@ -150,6 +150,21 @@ Tests are organized using **TestNG groups** for flexible execution:
 | `e2e` | Complete user journeys | Checkout flow | ~1 min |
 | `ui` | All UI tests | All current tests | ~5-10 min |
 
+
+### Data-Driven Testing
+Tests use TestNG DataProvider with CSV files for easy test data management:
+
+```bash
+# CartTests runs 3 scenarios from ProductDataProvider
+mvn test -Dtest=CartTests#testAddProductToCart
+
+# CheckoutTests runs 2 scenarios from checkout-payment.csv
+mvn test -Dtest=CheckoutTests#testPlaceOrderLogInBeforeCheckout
+
+# Add new test scenarios by editing CSV files (no code changes needed)
+# src/test/resources/testdata/products.csv
+# src/test/resources/testdata/checkout-payment.csv
+
 ---
 
 ## 📊 Test Reports
@@ -257,10 +272,13 @@ This framework was built as part of a transition from manual QA (18 years) to te
 - [x] TestConfig utility for secure credential management
 - [x] **10 UI tests passing** (9 feature + 1 E2E journey)
 
-### **Phase 4: Data-Driven Testing (Week 5)**
-- [ ] TestNG DataProvider implementation
-- [ ] CSV/JSON test data management
-- [ ] Parameterized test scenarios
+### ✅ **Phase 4: Data-Driven Testing (Week 6) - COMPLETE**
+- [x] TestNG DataProvider implementation for CartTests and CheckoutTests
+- [x] CSV-based test data management with centralized ProductDataProvider
+- [x] Parameterized test scenarios (+200% test coverage without code duplication)
+- [x] TestDataReader utility with data enrichment pattern
+- [x] Shared product catalog (products.csv) reusable across test classes
+- [x] **11 UI tests passing** (5 data-driven scenarios)
 
 ### **Phase 5: API Testing Integration (Week 6)**
 - [ ] REST Assured test suite
@@ -306,8 +324,8 @@ Special thanks to the open-source community for excellent tools like Selenium, T
 
 ---
 
-**Status**: ✅ Phase 3 Complete (Weeks 4-5) | 🚧 Phase 4 Starting (Data-Driven Testing)
+**Status**: ✅ Phase 4 Complete (Week 6) | 🚧 Phase 5 Starting (API Testing)
 
-**Last Updated**: November 25, 2025
+**Last Updated**: November 28, 2025
 
-**Current State**: 10 UI tests passing | TestNG groups implemented | E2E checkout flow validated
+**Current State**: 11 UI tests passing | Data-driven testing with CSV | Centralized product catalog
