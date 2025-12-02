@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
-import static io.restassured.path.json.JsonPath.*;
+import static io.restassured.path.json.JsonPath.from;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.*;
  * Validates product catalog retrieval, search, and data structure.
  */
 public class ProductAPITests extends BaseAPITest {
+
     @Test(groups = {"api", "regression", "smoke"})
     public void testGetAllProducts() {
         // Get response
@@ -26,11 +27,33 @@ public class ProductAPITests extends BaseAPITest {
         // Extract JSON from HTML body
         String responseBody = response.getBody().asString();
 
-        // Validate status and JSON content
+        // Validate
         assertThat("Status code", response.getStatusCode(), is(200));
-        assertThat("Response contains JSON", responseBody, containsString("{"));
         assertThat("Response code is 200", from(responseBody).getInt("responseCode"), is(200));
         assertThat("Products exist", from(responseBody).getList("products"), is(notNullValue()));
         assertThat("Products not empty", from(responseBody).getList("products").size(), greaterThan(0));
+
+        System.out.println("✅ API returned " + from(responseBody).getList("products").size() + " products");
+    }
+
+    @Test(groups = {"api", "regression"})
+    public void testGetAllBrands() {
+        // Get response
+        Response response =
+            given()
+                .log().all()
+            .when()
+                .get("/brandsList");
+
+        // Extract JSON from HTML body
+        String responseBody = response.getBody().asString();
+
+        // Validate
+        assertThat("Status code", response.getStatusCode(), is(200));
+        assertThat("Response code is 200", from(responseBody).getInt("responseCode"), is(200));
+        assertThat("Brands exist", from(responseBody).getList("brands"), is(notNullValue()));
+        assertThat("Brands not empty", from(responseBody).getList("brands").size(), greaterThan(0));
+
+        System.out.println("✅ API returned " + from(responseBody).getList("brands").size() + " brands");
     }
 }
