@@ -1,7 +1,7 @@
-package io.github.aslavchev;
+package io.github.aslavchev.ui;
 
 import io.github.aslavchev.base.BaseTest;
-import io.github.aslavchev.pages.LoginPage;
+import io.github.aslavchev.ui.pages.LoginPage;
 import io.github.aslavchev.utils.TestConfig;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;

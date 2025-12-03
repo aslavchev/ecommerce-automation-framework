@@ -8,17 +8,17 @@
 
     <test name="Login Tests" preserve-order="true">
         <classes>
-            <class name="io.github.aslavchev.LoginTests"/>
+            <class name="io.github.aslavchev.ui.LoginTests"/>
         </classes>
     </test>
     <test name="Product Tests" preserve-order="true">
         <classes>
-            <class name="io.github.aslavchev.ProductTests"/>
+            <class name="io.github.aslavchev.ui.ProductTests"/>
         </classes>
     </test>
     <test name="Cart Tests" preserve-order="true">
         <classes>
-            <class name="io.github.aslavchev.CartTests"/>
+            <class name="io.github.aslavchev.ui.CartTests"/>
         </classes>
     </test>
     <test name="API Tests" preserve-order="true">

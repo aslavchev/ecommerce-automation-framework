@@ -2,7 +2,7 @@ package io.github.aslavchev;
 
 import io.github.aslavchev.base.BaseTest;
 import io.github.aslavchev.dataproviders.ProductDataProvider;
-import io.github.aslavchev.pages.*;
+import io.github.aslavchev.ui.pages.*;
 import io.github.aslavchev.utils.TestConfig;
 import io.github.aslavchev.utils.TestDataReader;
 import io.qameta.allure.Description;
