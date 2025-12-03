@@ -1,9 +1,16 @@
 # E-Commerce Test Automation Framework
 
 ![Build Status](https://github.com/aslavchev/ecommerce-automation-framework/actions/workflows/test-automation.yml/badge.svg)
+[![Tests](https://github.com/aslavchev/ecommerce-automation-framework/actions/workflows/allure-report
+.yml/badge.svg)](https://github.com/aslavchev/ecommerce-automation-framework/actions)
+[![Allure Report](https://img.shields.io/badge/📊_Report-Live-blue)](https://aslavchev.github.io/ecommerce-automation-framework/)
+![Tests](https://img.shields.io/badge/tests-18_passing-brightgreen)
+![REST Assured](https://img.shields.io/badge/REST_Assured-5.5.6-blue)
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![Selenium](https://img.shields.io/badge/Selenium-4.38.0-green)
 ![TestNG](https://img.shields.io/badge/TestNG-7.11.0-red)
+
+
 
 **Strategic test automation framework for e-commerce testing demonstrating production-ready automation practices.**
 
