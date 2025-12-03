@@ -2,7 +2,7 @@
 
 [![Tests Status](https://github.com/aslavchev/ecommerce-automation-framework/actions/workflows/allure-report.yml/badge.svg)](https://github.com/aslavchev/ecommerce-automation-framework/actions)
 [![Live Report](https://img.shields.io/badge/📊_Allure_Report-View_Live-blue?style=flat&logo=github)](https://aslavchev.github.io/ecommerce-automation-framework/)
-![Tests](https://img.shields.io/badge/tests-18_passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-23_passing-brightgreen)
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![Selenium](https://img.shields.io/badge/Selenium-4.38.0-green)
 ![REST Assured](https://img.shields.io/badge/REST_Assured-5.5.6-blue)
@@ -37,7 +37,7 @@ Built by a QA professional with 18 years of testing expertise, this framework co
 | **API Testing** | REST Assured | 5.5.6 |
 | **Reporting** | Allure Report | 2.29.0 |
 | **Driver Management** | WebDriverManager | 6.3.2 |
-| **CI/CD** | GitHub Actions | In Progress |
+| **CI/CD** | GitHub Actions | ✅ Active |
 | **Containerization** | Docker | Planned |
 
 ---
@@ -289,10 +289,13 @@ This framework was built as part of a transition from manual QA (18 years) to te
 - [x] Shared product catalog (products.csv) reusable across test classes
 - [x] **11 UI tests passing** (5 data-driven scenarios)
 
-### **Phase 5: API Testing Integration (Week 6)**
-- [ ] REST Assured test suite
-- [ ] API + UI combined test scenarios
-- [ ] Full-stack QA demonstration
+### ✅ **Phase 5: API Testing Integration (Week 7) - COMPLETE**
+- [x] REST Assured framework setup with BaseAPITest
+- [x] APIHelper utility class for reusable API methods
+- [x] 7 API tests (Products, Search, Authentication)
+- [x] Data-driven API tests with CSV (5 scenarios)
+- [x] Generic TestDataReader for simple CSV files
+- [x] **12 API tests passing** (7 standard + 5 data-driven)
 
 ### **Phase 6: Advanced CI/CD (Weeks 7-8)**
 - [ ] Parallel test execution configuration
@@ -333,8 +336,8 @@ Special thanks to the open-source community for excellent tools like Selenium, T
 
 ---
 
-**Status**: ✅ Phase 4 Complete (Week 6) | 🚧 Phase 5 Starting (API Testing)
+**Status**: ✅ Phase 5 Complete (Week 7) | 🎯 Ready for Phase 6
 
-**Last Updated**: November 28, 2025
+**Last Updated**: December 3, 2025
 
-**Current State**: 11 UI tests passing | Data-driven testing with CSV | Centralized product catalog
+**Current State**: 23 tests passing (11 UI + 12 API) | REST Assured framework | Data-driven testing
