@@ -23,13 +23,7 @@ public class AuthAPITests extends BaseAPITest {
         String password = TestConfig.password();
 
         // Act
-        Response response =
-            given()
-                .log().all()
-                .formParam("email", email)
-                .formParam("password", password)
-            .when()
-                .post("/verifyLogin");
+        Response response = APIHelper.verifyLogin(email, password);
 
         String responseBody = response.getBody().asString();
 
@@ -51,13 +45,7 @@ public class AuthAPITests extends BaseAPITest {
         String invalidPassword = "wrongpassword";
 
         // Act
-        Response response =
-            given()
-                .log().all()
-                .formParam("email", invalidEmail)
-                .formParam("password", invalidPassword)
-            .when()
-                .post("/verifyLogin");
+        Response response = APIHelper.verifyLogin(invalidEmail,invalidPassword);
 
         String responseBody = response.getBody().asString();
 

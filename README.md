@@ -42,12 +42,37 @@ Built by a QA professional with 18 years of testing expertise, this framework co
 
 ---
 
-## 📁 Project Structure
 
-## 📁 Project Structure```ecommerce-automation-framework/├── src/│   ├── main/java/io/github/aslavchev/│   │   └── ui/│   │       └── pages/          # UI Page Objects│   │           ├── BasePage.java│   │           ├── LoginPage.java│   │           ├── ProductsPage.java, ProductDetailsPage.java│   │           ├── CartPage.java│   │           └── CheckoutPage.java, PaymentPage.java│   └── test/java/io/github/aslavchev/│       ├── ui/                 # UI tests│       │   ├── LoginTests.java│       │   ├── ProductTests.java│       │   └── CartTests.java│       ├── api/                # API tests (7 tests)│       │   ├── base/BaseAPITest.java│       │   ├── ProductAPITests.java│       │   ├── SearchAPITests.java│       │   └── AuthAPITests.java│       ├── e2e/CheckoutTests.java│       ├── base/BaseTest.java│       ├── utils/TestConfig.java│       └── dataproviders/ProductDataProvider.java
-├── .github/workflows/          # CI/CD pipelines
-└── docs/                       # Documentation
-    └── architecture/           # Architecture Decision Records
+
+## 📁 Project Structure
+```ecommerce-automation-framework/
+  ├── src/
+  │   ├── main/java/io/github/aslavchev/
+  │   │   └── ui/
+  │   │       └── pages/          # UI Page Objects
+  │   │           ├── BasePage.java
+  │   │           ├── LoginPage.java
+  │   │           ├── ProductsPage.java, ProductDetailsPage.java
+  │   │           ├── CartPage.java
+  │   │           └── CheckoutPage.java, PaymentPage.java
+  │   └── test/java/io/github/aslavchev/
+  │       ├── ui/                 # UI tests (11 tests)
+  │       │   ├── LoginTests.java
+  │       │   ├── ProductTests.java
+  │       │   ├── CartTests.java
+  │       │   └── CheckoutTests.java
+  │       ├── api/                # API tests (7 tests)
+  │       │   ├── base/BaseAPITest.java
+  │       │   ├── ProductAPITests.java
+  │       │   ├── SearchAPITests.java
+  │       │   ├── AuthAPITests.java
+  │       │   └── APIHelper.java
+  │       ├── base/BaseTest.java
+  │       ├── utils/TestConfig.java
+  │       └── dataproviders/ProductDataProvider.java
+  ├── .github/workflows/          # CI/CD pipelines
+  └── docs/                       # Documentation
+      └── architecture/           # Architecture Decision Records
 ```
 
 ---

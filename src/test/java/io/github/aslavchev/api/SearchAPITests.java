@@ -23,12 +23,7 @@ public class SearchAPITests extends BaseAPITest {
         String searchTerm = "tshirt";
 
         // Act
-        Response response =
-            given()
-                .log().all()
-                .formParam("search_product", searchTerm)
-            .when()
-                .post("/searchProduct");
+        Response response = APIHelper.searchProduct(searchTerm);
 
         String responseBody = response.getBody().asString();
 
@@ -53,11 +48,7 @@ public class SearchAPITests extends BaseAPITest {
         // Arrange - No parameters to send
 
         // Act
-        Response response =
-            given()
-                .log().all()
-            .when()
-                .post("/searchProduct");
+        Response response = APIHelper.searchProductNoParams();
 
         String responseBody = response.getBody().asString();
 

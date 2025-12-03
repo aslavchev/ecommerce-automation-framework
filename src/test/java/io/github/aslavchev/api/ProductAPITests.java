@@ -20,11 +20,7 @@ public class ProductAPITests extends BaseAPITest {
         // Arrange - No parameters needed for GET
 
         // Act
-        Response response =
-            given()
-                .log().all()
-            .when()
-                .get("/productsList");
+        Response response = APIHelper.getAllProducts();
 
         // Extract JSON from HTML body
         String responseBody = response.getBody().asString();
@@ -43,11 +39,7 @@ public class ProductAPITests extends BaseAPITest {
         // Arrange - No parameters needed for GET
 
         // Act
-        Response response =
-            given()
-                .log().all()
-            .when()
-                .get("/brandsList");
+        Response response = APIHelper.getAllBrands();
 
         // Extract JSON from HTML body
         String responseBody = response.getBody().asString();
