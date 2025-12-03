@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * TestDataReader - Utility class for reading test data from CSV files
@@ -58,5 +60,29 @@ public class TestDataReader {
 
         // Convert List to 2D Object array
         return rows.toArray(new Object[0][]);
+    }
+
+    public static Object[][] readSimpleTestData(String csvFileName) {
+        String filePath = "src/test/resources/testdata/" + csvFileName;
+        List<Map<String, String>> rows = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String headerLine = br.readLine();
+            String[] headers = headerLine.split(",");
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                Map<String, String> row = new HashMap<>();
+                for (int i = 0; i < headers.length; i++) {
+                    row.put(headers[i], values[i]);
+                }
+                rows.add(row);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read CSV: " + filePath, e);
+        }
+
+        return rows.stream().map(row -> new Object[]{row}).toArray(Object[][]::new);
     }
 }

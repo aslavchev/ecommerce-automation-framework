@@ -1,12 +1,12 @@
 package io.github.aslavchev.api;
 
+import io.github.aslavchev.utils.TestDataReader;
+import org.testng.annotations.DataProvider;
 import io.github.aslavchev.api.base.BaseAPITest;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-
 import java.util.Map;
 
-import static io.restassured.RestAssured.*;
 import static io.restassured.path.json.JsonPath.from;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -57,9 +57,33 @@ public class SearchAPITests extends BaseAPITest {
         assertThat("Response code is 400", from(responseBody).getInt("responseCode"), is(400));
         assertThat("Error message exists", from(responseBody).getString("message"), is(notNullValue()));
         assertThat("Error message mentions missing parameter",
-            from(responseBody).getString("message"),
-            containsString("search_product parameter is missing"));
+                from(responseBody).getString("message"),
+                containsString("search_product parameter is missing"));
 
         System.out.println("✅ API correctly validates missing search_product parameter");
+    }
+
+    @DataProvider(name = "searchTerms")
+    public Object[][] getSearchTerms() {
+        return TestDataReader.readSimpleTestData("search-terms.csv");
+    }
+
+    @Test(dataProvider = "searchTerms", groups = {"api", "regression"})
+    public void testSearchProductDataDriven(Map<String, String> data) {
+        // Arrange
+        String searchTerm = data.get("searchTerm");
+
+        // Act
+        Response response = APIHelper.searchProduct(searchTerm);
+        String responseBody = response.getBody().asString();
+
+        // Assert
+        assertThat("Status code", response.getStatusCode(), is(200));
+        assertThat("Response code is 200", from(responseBody).getInt("responseCode"), is(200));
+        assertThat("Products exist", from(responseBody).getList("products"), is(notNullValue()));
+        assertThat("Products not empty", from(responseBody).getList("products").size(), greaterThan(0));
+
+        System.out.println("✅ Search for '" + searchTerm + "' returned " +
+                from(responseBody).getList("products").size() + " products");
     }
 }

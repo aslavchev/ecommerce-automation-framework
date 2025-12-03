@@ -45,7 +45,8 @@ Built by a QA professional with 18 years of testing expertise, this framework co
 
 
 ## 📁 Project Structure
-```ecommerce-automation-framework/
+```
+ecommerce-automation-framework/
   ├── src/
   │   ├── main/java/io/github/aslavchev/
   │   │   └── ui/
