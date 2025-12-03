@@ -1,18 +1,16 @@
 # E-Commerce Test Automation Framework
 
-![Build Status](https://github.com/aslavchev/ecommerce-automation-framework/actions/workflows/test-automation.yml/badge.svg)
-[![Tests](https://github.com/aslavchev/ecommerce-automation-framework/actions/workflows/allure-report
-.yml/badge.svg)](https://github.com/aslavchev/ecommerce-automation-framework/actions)
+[![Tests](https://github.com/aslavchev/ecommerce-automation-framework/actions/workflows/allure-report.yml/badge.svg)](https://github.com/aslavchev/ecommerce-automation-framework/actions)
 [![Allure Report](https://img.shields.io/badge/📊_Report-Live-blue)](https://aslavchev.github.io/ecommerce-automation-framework/)
 ![Tests](https://img.shields.io/badge/tests-18_passing-brightgreen)
-![REST Assured](https://img.shields.io/badge/REST_Assured-5.5.6-blue)
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![Selenium](https://img.shields.io/badge/Selenium-4.38.0-green)
-![TestNG](https://img.shields.io/badge/TestNG-7.11.0-red)
-
-
+![REST Assured](https://img.shields.io/badge/REST_Assured-5.5.6-blue)
 
 **Strategic test automation framework for e-commerce testing demonstrating production-ready automation practices.**
+
+> **[📊 View Live Test Report](https://aslavchev.github.io/ecommerce-automation-framework/)** - Automated reports updated on every commit
+---
 
 ---
 
@@ -47,28 +45,7 @@ Built by a QA professional with 18 years of testing expertise, this framework co
 
 ## 📁 Project Structure
 
-```
-ecommerce-automation-framework/
-├── src/
-│   ├── main/java/io/github/aslavchev/
-│   │   └── pages/              # Page Object Model classes
-│   │       ├── BasePage.java   # Foundation for all page objects
-│   │       ├── LoginPage.java
-│   │       ├── ProductsPage.java, ProductDetailsPage.java
-│   │       ├── CartPage.java
-│   │       └── CheckoutPage.java, PaymentPage.java, OrderConfirmationPage.java
-│   └── test/java/io/github/aslavchev/
-│       ├── base/               # Base test classes
-│       │   └── BaseTest.java
-│       ├── e2e/                # End-to-end user journeys
-│       │   └── CheckoutTests.java
-│       ├── utils/              # Test utilities
-│       │   └── TestConfig.java # Secure credential management
-│       ├── LoginTests.java     # Feature tests (organized by feature)
-│       ├── ProductTests.java
-│       └── CartTests.java
-├── .env                        # Local credentials (gitignored)
-├── pom.xml                     # Maven configuration
+## 📁 Project Structure```ecommerce-automation-framework/├── src/│   ├── main/java/io/github/aslavchev/│   │   └── ui/│   │       └── pages/          # UI Page Objects│   │           ├── BasePage.java│   │           ├── LoginPage.java│   │           ├── ProductsPage.java, ProductDetailsPage.java│   │           ├── CartPage.java│   │           └── CheckoutPage.java, PaymentPage.java│   └── test/java/io/github/aslavchev/│       ├── ui/                 # UI tests│       │   ├── LoginTests.java│       │   ├── ProductTests.java│       │   └── CartTests.java│       ├── api/                # API tests (7 tests)│       │   ├── base/BaseAPITest.java│       │   ├── ProductAPITests.java│       │   ├── SearchAPITests.java│       │   └── AuthAPITests.java│       ├── e2e/CheckoutTests.java│       ├── base/BaseTest.java│       ├── utils/TestConfig.java│       └── dataproviders/ProductDataProvider.java
 ├── .github/workflows/          # CI/CD pipelines
 └── docs/                       # Documentation
     └── architecture/           # Architecture Decision Records
