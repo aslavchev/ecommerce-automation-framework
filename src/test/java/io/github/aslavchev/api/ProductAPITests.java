@@ -17,7 +17,9 @@ public class ProductAPITests extends BaseAPITest {
 
     @Test(groups = {"api", "regression", "smoke"})
     public void testGetAllProducts() {
-        // Get response
+        // Arrange - No parameters needed for GET
+
+        // Act
         Response response =
             given()
                 .log().all()
@@ -27,7 +29,7 @@ public class ProductAPITests extends BaseAPITest {
         // Extract JSON from HTML body
         String responseBody = response.getBody().asString();
 
-        // Validate
+        // Assert
         assertThat("Status code", response.getStatusCode(), is(200));
         assertThat("Response code is 200", from(responseBody).getInt("responseCode"), is(200));
         assertThat("Products exist", from(responseBody).getList("products"), is(notNullValue()));
@@ -38,7 +40,9 @@ public class ProductAPITests extends BaseAPITest {
 
     @Test(groups = {"api", "regression"})
     public void testGetAllBrands() {
-        // Get response
+        // Arrange - No parameters needed for GET
+
+        // Act
         Response response =
             given()
                 .log().all()
@@ -48,7 +52,7 @@ public class ProductAPITests extends BaseAPITest {
         // Extract JSON from HTML body
         String responseBody = response.getBody().asString();
 
-        // Validate
+        // Assert
         assertThat("Status code", response.getStatusCode(), is(200));
         assertThat("Response code is 200", from(responseBody).getInt("responseCode"), is(200));
         assertThat("Brands exist", from(responseBody).getList("brands"), is(notNullValue()));

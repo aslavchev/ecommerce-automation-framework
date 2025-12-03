@@ -21,4 +21,11 @@
             <class name="io.github.aslavchev.CartTests"/>
         </classes>
     </test>
+    <test name="API Tests" preserve-order="true">
+        <classes>
+            <class name="io.github.aslavchev.api.ProductAPITests"/>
+            <class name="io.github.aslavchev.api.SearchAPITests"/>
+            <class name="io.github.aslavchev.api.AuthAPITests"/>
+        </classes>
+    </test>
 </suite>
