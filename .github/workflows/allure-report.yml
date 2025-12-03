@@ -7,6 +7,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -38,16 +41,18 @@ jobs:
         path: gh-pages
 
     - name: Build test report
-      uses: simple-elf/allure-report-action@v1.7
+      uses: simple-elf/allure-report-action@master
       if: always()
       with:
-        gh_pages: gh-pages
-        allure_history: allure-history
         allure_results: target/allure-results
+        gh_pages: gh-pages
+        allure_report: allure-report
+        allure_history: allure-history
+        keep_reports: 20
 
-    - name: Publish test report
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Deploy report to Github Pages
       if: always()
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
