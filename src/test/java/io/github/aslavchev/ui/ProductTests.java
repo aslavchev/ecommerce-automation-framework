@@ -11,7 +11,7 @@ public class ProductTests extends BaseTest {
 
     @Test(groups = {"smoke", "regression", "ui"})
     @Description("Test Case 8: Verify All Products page navigation")
-    public void testNavigationToProductsPage() {
+    public void navigateToAllProductsPageSuccessfully() {
         //Arrange
         ProductsPage productsPage = new ProductsPage(driver);
 
@@ -25,7 +25,7 @@ public class ProductTests extends BaseTest {
 
     @Test(groups = {"regression", "ui"})
     @Description("Test Case 9: Search products by keyword")
-    public void testSearchProduct() {
+    public void searchProductByKeywordReturnsResults() {
         //Arrange
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.navigateProducts();
@@ -42,7 +42,7 @@ public class ProductTests extends BaseTest {
 
     @Test(groups = {"regression", "ui"})
     @Description("Test Case 18: Filter products by category (Women > Dress)")
-    public void testFilterByCategory() {
+    public void filterProductsByCategoryWomenDress() {
         //Arrange
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.navigateProducts();
@@ -62,7 +62,7 @@ public class ProductTests extends BaseTest {
 
     @Test(groups = {"regression", "ui"})
     @Description("Test case 8: View product details page")
-    public void testViewProductDetails() {
+    public void viewProductDetailsPageShowsAllInfo() {
         //Arrange
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.navigateProducts();

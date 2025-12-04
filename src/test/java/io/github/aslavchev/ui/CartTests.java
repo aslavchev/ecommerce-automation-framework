@@ -59,7 +59,7 @@ public class CartTests extends BaseTest {
 
     @Test(groups = {"regression", "ui"})
     @Description("Test Case 17: Remove product from cart")
-    public void testRemoveProductFromCart() {
+    public void removeProductFromCartAndVerifyEmpty() {
         //Arrange
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.navigateProducts();
