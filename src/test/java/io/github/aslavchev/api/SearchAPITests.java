@@ -1,6 +1,7 @@
 package io.github.aslavchev.api;
 
 import io.github.aslavchev.utils.TestDataReader;
+import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
 import io.github.aslavchev.api.base.BaseAPITest;
 import io.restassured.response.Response;
@@ -18,7 +19,8 @@ import static org.hamcrest.Matchers.*;
 public class SearchAPITests extends BaseAPITest {
 
     @Test(groups = {"api", "regression", "smoke"})
-    public void testSearchProductValid() {
+    @Description("API-5: Search product with valid term")
+    public void searchProductWithValidTermReturnsResults() {
         // Arrange
         String searchTerm = "tshirt";
 
@@ -44,7 +46,8 @@ public class SearchAPITests extends BaseAPITest {
     }
 
     @Test(groups = {"api", "regression"})
-    public void testSearchProductMissingParameter() {
+    @Description("API-6: Search product without search_product parameter")
+    public void searchProductWithoutParameterReturns400() {
         // Arrange - No parameters to send
 
         // Act
@@ -69,7 +72,8 @@ public class SearchAPITests extends BaseAPITest {
     }
 
     @Test(dataProvider = "searchTerms", groups = {"api", "regression"})
-    public void testSearchProductDataDriven(Map<String, String> data) {
+    @Description("API-5: Search product with valid term (Data-Driven)")
+    public void searchProductDataDrivenReturnsResults(Map<String, String> data) {
         // Arrange
         String searchTerm = data.get("searchTerm");
 

@@ -1,6 +1,7 @@
 package io.github.aslavchev.api;
 
 import io.github.aslavchev.api.base.BaseAPITest;
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -16,7 +17,8 @@ import static org.hamcrest.Matchers.*;
 public class ProductAPITests extends BaseAPITest {
 
     @Test(groups = {"api", "regression", "smoke"})
-    public void testGetAllProducts() {
+    @Description("API-1: Get all products list")
+    public void getAllProductsReturnsNonEmptyList() {
         // Arrange - No parameters needed for GET
 
         // Act
@@ -35,7 +37,8 @@ public class ProductAPITests extends BaseAPITest {
     }
 
     @Test(groups = {"api", "regression"})
-    public void testGetAllBrands() {
+    @Description("API-3: Get all brands list")
+    public void getAllBrandsReturnsNonEmptyList() {
         // Arrange - No parameters needed for GET
 
         // Act

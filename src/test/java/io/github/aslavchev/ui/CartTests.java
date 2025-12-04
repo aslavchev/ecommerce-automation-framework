@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 public class CartTests extends BaseTest {
     @Test(groups = {"regression", "ui"}, dataProvider = "productData")
     @Description("Test Case 12: Add product to cart and verify (Data-Driven)")
-    public void testAddProductToCart(String testName, String product1, String product2) {
+    public void addMultipleProductsToCartAndVerify(String testName, String product1, String product2) {
         // Arrange
         // Products are now passed as parameters from DataProvider
         ProductsPage productsPage = new ProductsPage(driver);
@@ -42,7 +42,7 @@ public class CartTests extends BaseTest {
 
     @Test(groups = {"regression", "ui"})
     @Description("Test Case 13: Verify product quantity in cart")
-    public void testVerifyProductQuantityInCart() {
+    public void verifyCustomQuantityInCart() {
         //Arrange
         int expectedQuantity = 4;
         ProductDetailsPage detailsPage = new ProductDetailsPage(driver);

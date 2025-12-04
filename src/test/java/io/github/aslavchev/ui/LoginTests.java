@@ -13,7 +13,7 @@ public class LoginTests extends BaseTest {
 
     @Test(groups = {"smoke", "regression", "critical", "ui"})
     @Description("Verify successful login displays correct username")
-    public void testValidLogin() {
+    public void validLoginDisplaysUsername() {
         // Arrange
         String email = TestConfig.email();
         String password = TestConfig.password();
@@ -31,7 +31,7 @@ public class LoginTests extends BaseTest {
 
     @Test(groups = {"regression", "ui"})
     @Description("Verify error message for invalid credentials")
-    public void testInvalidLogin() {
+    public void invalidLoginShowsErrorMessage() {
         // Arrange
         String email = TestConfig.email();
 

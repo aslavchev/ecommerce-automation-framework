@@ -2,6 +2,7 @@ package io.github.aslavchev.api;
 
 import io.github.aslavchev.api.base.BaseAPITest;
 import io.github.aslavchev.utils.TestConfig;
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -17,7 +18,8 @@ import static org.hamcrest.Matchers.*;
 public class AuthAPITests extends BaseAPITest {
 
     @Test(groups = {"api", "regression", "smoke"})
-    public void testVerifyLoginValid() {
+    @Description("API-7: Verify login with valid credentials")
+    public void loginWithValidCredentialsReturnsSuccess() {
         // Arrange
         String email = TestConfig.email();
         String password = TestConfig.password();
@@ -39,7 +41,8 @@ public class AuthAPITests extends BaseAPITest {
     }
 
     @Test(groups = {"api", "regression"})
-    public void testVerifyLoginInvalidCredentials() {
+    @Description("API-10: Verify login with invalid credentials")
+    public void loginWithInvalidCredentialsReturnsUserNotFound() {
         // Arrange
         String invalidEmail = "invalid@example.com";
         String invalidPassword = "wrongpassword";
@@ -61,7 +64,8 @@ public class AuthAPITests extends BaseAPITest {
     }
 
     @Test(groups = {"api", "regression"})
-    public void testVerifyLoginMissingParameter() {
+    @Description("API-8: Verify login without email parameter")
+    public void loginWithoutEmailParameterReturns400() {
         // Arrange
         String password = TestConfig.password();
 
