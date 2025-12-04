@@ -62,7 +62,7 @@ ecommerce-automation-framework/
   │       │   ├── ProductTests.java
   │       │   ├── CartTests.java
   │       │   └── CheckoutTests.java
-  │       ├── api/                # API tests (7 tests)
+  │       ├── api/                # API tests (12 tests)
   │       │   ├── base/BaseAPITest.java
   │       │   ├── ProductAPITests.java
   │       │   ├── SearchAPITests.java
@@ -140,9 +140,6 @@ mvn test -Dgroups=e2e                   # End-to-end user journeys
 mvn test -Dtest=LoginTests
 mvn test -Dtest=e2e.CheckoutTests
 
-# Run with specific browser
-mvn test -Dbrowser=chrome
-
 # Generate Allure report
 mvn clean test && mvn allure:serve
 ```
@@ -154,7 +151,7 @@ Tests are organized using **TestNG groups** for flexible execution:
 | Group | Purpose | Tests | Run Time |
 |-------|---------|-------|----------|
 | `smoke` | Fast sanity checks | Login, Product navigation | ~2 min |
-| `regression` | Full test suite | All 10 tests | ~5-10 min |
+| `regression` | Full test suite | All 23 tests | ~5-10 min |
 | `critical` | Business-critical paths | Login (valid), E2E Checkout | ~3 min |
 | `e2e` | Complete user journeys | Checkout flow | ~1 min |
 | `ui` | All UI tests | All current tests | ~5-10 min |
@@ -165,10 +162,10 @@ Tests use TestNG DataProvider with CSV files for easy test data management:
 
 ```bash
 # CartTests runs 3 scenarios from ProductDataProvider
-mvn test -Dtest=CartTests#testAddProductToCart
+mvn test -Dtest=CartTests#addMultipleProductsToCartAndVerify
 
 # CheckoutTests runs 2 scenarios from checkout-payment.csv
-mvn test -Dtest=CheckoutTests#testPlaceOrderLogInBeforeCheckout
+mvn test -Dtest=e2e.CheckoutTests#placeOrderWithLoginBeforeCheckout
 
 # Add new test scenarios by editing CSV files (no code changes needed)
 # src/test/resources/testdata/products.csv
@@ -292,25 +289,70 @@ This framework was built as part of a transition from manual QA (18 years) to te
 ### ✅ **Phase 5: API Testing Integration (Week 7) - COMPLETE**
 - [x] REST Assured framework setup with BaseAPITest
 - [x] APIHelper utility class for reusable API methods
-- [x] 7 API tests (Products, Search, Authentication)
+- [x] 12 API tests (Products, Search, Authentication)
 - [x] Data-driven API tests with CSV (5 scenarios)
 - [x] Generic TestDataReader for simple CSV files
-- [x] **12 API tests passing** (7 standard + 5 data-driven)
+- [x] **12 API tests passing** (8 standard + 4 data-driven)
 
-### **Phase 6: Advanced CI/CD (Weeks 7-8)**
-- [ ] Parallel test execution configuration
-- [ ] Cross-browser testing (Chrome, Firefox)
-- [ ] Test retry mechanisms for flaky tests
+### 🚧 **Phase 6: Test Reliability (Week 8) - IN PROGRESS**
+**Focus**: Production-grade reliability patterns and cross-browser support
 
-### **Phase 7: Containerization (Weeks 9-10)**
-- [ ] Docker test execution environment
-- [ ] Selenium Grid setup
-- [ ] Scalable infrastructure
+- [ ] **Retry Mechanism**
+  - TestNG IRetryAnalyzer implementation
+  - Flakiness tracking and logging
+  - Retry strategy documentation (when to use, when not to)
+- [ ] **Cross-Browser Testing**
+  - Firefox WebDriver support (alongside Chrome)
+  - System property: `-Dbrowser=chrome/firefox`
+  - CI matrix: parallel browser execution
+- [ ] **Test Stability Documentation**
+  - Test stability patterns guide
+  - Flaky test debugging strategies
 
-### **Phase 8: Polish & Completion (Weeks 11-12)**
-- [ ] Performance optimization
-- [ ] Comprehensive documentation updates
-- [ ] Final portfolio review
+**Goal**: Demonstrate production reliability engineering for enterprise QA roles
+
+---
+
+### **Phase 7: Performance & Scale (Week 9) - PLANNED**
+**Focus**: Performance engineering and scalability proof *(FAANG differentiator)*
+
+- [ ] **Parallel Execution** ⭐ *Critical for Senior SDET roles*
+  - TestNG `parallel="methods"` configuration
+  - Thread-safe test design audit
+  - Performance metrics: Sequential vs. Parallel execution time
+  - Document proof: "23 tests: 8min → 3min with parallelization"
+- [ ] **CI Optimization**
+  - GitHub Actions matrix: Chrome & Firefox parallel jobs
+  - Execution time reduction evidence in CI logs
+- [ ] **Scalability Documentation**
+  - README section: "Scaling Beyond 100 Tests"
+  - Infrastructure readiness notes (Docker/Grid awareness)
+  - Future-proofing strategy documentation
+
+**Goal**: Concrete performance engineering proof + senior-level interview talking points
+
+---
+
+### **Phase 8: Portfolio Polish (Week 10) - PLANNED**
+**Focus**: Interview-ready presentation and strategic positioning
+
+- [ ] **README Enhancement**
+  - Add "Performance Engineering" section with metrics
+  - Add "Scalability Strategy" section with parallel execution proof
+  - Add "Test Reliability" section with retry patterns
+- [ ] **Interview Preparation Assets**
+  - `docs/INTERVIEW-GUIDE.md` creation:
+    - Key architectural decisions explained
+    - Parallel execution deep-dive
+    - Flaky test handling war stories
+    - "What I'd do differently" reflections
+- [ ] **Code Quality Audit**
+  - Remove dead/unused code
+  - Ensure consistent naming conventions
+  - Final Allure report screenshot refresh
+  - Performance baseline documentation
+
+**Goal**: Portfolio optimized for Senior SDET interviews at top-tier tech companies
 
 ---
 
@@ -336,8 +378,8 @@ Special thanks to the open-source community for excellent tools like Selenium, T
 
 ---
 
-**Status**: ✅ Phase 5 Complete (Week 7) | 🎯 Ready for Phase 6
+**Status**: ✅ Phase 5 Complete (Week 7) | 🚧 Phase 6: Test Reliability (Week 8)
 
-**Last Updated**: December 3, 2025
+**Last Updated**: December 4, 2025
 
 **Current State**: 23 tests passing (11 UI + 12 API) | REST Assured framework | Data-driven testing
