@@ -30,26 +30,48 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
+        // Browser selection via system property: -Dbrowser=chrome/firefox
+        String browser = System.getProperty("browser", "chrome").toLowerCase();
 
         // Detect CI environment (GitHub Actions sets CI=true)
         boolean isCI = System.getenv("CI") != null;
 
-        if (isCI) {
-            // CI-specific configuration (headless mode for servers without display)
-            options.addArguments("--headless=new");           // New headless mode (Selenium 4.8+)
-            options.addArguments("--no-sandbox");              // Required for CI environments
-            options.addArguments("--disable-dev-shm-usage");   // Overcome limited shared memory
-            options.addArguments("--disable-gpu");             // Disable GPU (not available in CI)
-            options.addArguments("--window-size=1920,1080");   // Set consistent viewport size
+        switch (browser) {
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+
+                if (isCI) {
+                    firefoxOptions.addArguments("--headless");
+                    firefoxOptions.addArguments("--no-sandbox");
+                    firefoxOptions.addArguments("--disable-dev-shm-usage");
+                    firefoxOptions.addArguments("--window-size=1920,1080");
+                }
+
+                firefoxOptions.addPreference("dom.webnotifications.enabled", false);
+                driver = new FirefoxDriver(firefoxOptions);
+                break;
+
+            case "chrome":
+            default:
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+
+                if (isCI) {
+                    chromeOptions.addArguments("--headless=new");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                    chromeOptions.addArguments("--disable-gpu");
+                    chromeOptions.addArguments("--window-size=1920,1080");
+                }
+
+                chromeOptions.addArguments("--disable-notifications");
+                chromeOptions.addArguments("--start-maximized");
+                driver = new ChromeDriver(chromeOptions);
+                break;
         }
 
-        // Common options for both local and CI
-        options.addArguments("--disable-notifications");
-        options.addArguments("--start-maximized");
-
-        driver = new ChromeDriver(options);
+        System.out.println("🌐 Browser: " + browser);
 
         // Handle consent popup if it appears
         handleConsentPopup();
