@@ -13,6 +13,10 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+      fail-fast: false
 
     steps:
     - name: Checkout code
@@ -25,11 +29,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Run tests with Maven
+    - name: Run tests with ${{matrix.browser}}
       env:
         TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
         TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
-      run: mvn clean test
+      run: mvn clean test -Dbrowser=${{ matrix.browser }}
       continue-on-error: true
 
     - name: Generate Allure Report with Maven
@@ -37,10 +41,9 @@ jobs:
       run: mvn allure:report
 
     - name: Deploy report to Github Pages
-      if: always()
+      if: always() && matrix.browser == 'chrome'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
         publish_dir: target/site/allure-maven-plugin
-
