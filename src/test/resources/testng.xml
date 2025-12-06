@@ -4,6 +4,7 @@
 <suite name="E-Commerce Automation Suite" verbose="1">
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+        <listener class-name="io.github.aslavchev.listeners.RetryListener"/>
     </listeners>
 
     <test name="Login Tests" preserve-order="true">

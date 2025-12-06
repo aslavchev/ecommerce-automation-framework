@@ -130,6 +130,12 @@
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>io.github.aslavchev.listeners.RetryListener</value>
+                        </property>
+                    </properties>
                 </configuration>
             </plugin>
 
