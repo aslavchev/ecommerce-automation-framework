@@ -313,23 +313,60 @@ This framework was built as part of a transition from manual QA (18 years) to te
 
 ---
 
+### **Phase 6.5: Infrastructure Modernization (Week 8.5) - PLANNED**
+**Focus**: Containerization, observability, and strategic tech decisions *(FAANG infrastructure signal)*
+
+- [ ] **Docker + Selenium Grid** ⭐ *Critical for infrastructure-as-code demonstration*
+  - `docker-compose.yml`: Selenium Hub + Chrome/Firefox nodes
+  - Updated `BaseTest.java`: `-Dexecution=local/grid` support
+  - Containerized test execution in CI
+  - `docs/DOCKER-SETUP.md`: Setup guide with architecture diagram
+
+- [ ] **Observability & Metrics**
+  - `TestMetrics.java`: JSON logging (test name, status, duration, browser, timestamp)
+  - SLF4J + Logback structured logging configuration
+  - `docs/OBSERVABILITY.md`: Metrics strategy and use cases
+  - Production-grade logging for debugging and trend analysis
+
+- [ ] **Tech Stack Rationale** ⭐ *Demonstrates data-driven decision making*
+  - `docs/TECH-STACK-RATIONALE.md`:
+    - Why TestNG over JUnit 5? (Job market: 5,700 Selenium+Java+TestNG roles)
+    - Why Selenium over Playwright? (Market demand data: 42,000 vs 3,200 jobs)
+    - Honest trade-off analysis and strategic thinking
+
+**Goal**: Demonstrate infrastructure thinking and data-driven tech decisions for Senior/Staff SDET roles
+
+---
+
 ### **Phase 7: Performance & Scale (Week 9) - PLANNED**
-**Focus**: Performance engineering and scalability proof *(FAANG differentiator)*
+**Focus**: Performance engineering, scalability proof, and microservices awareness *(FAANG differentiator)*
 
 - [ ] **Parallel Execution** ⭐ *Critical for Senior SDET roles*
   - TestNG `parallel="methods"` configuration
   - Thread-safe test design audit
   - Performance metrics: Sequential vs. Parallel execution time
   - Document proof: "23 tests: 8min → 3min with parallelization"
+
+- [ ] **Contract Testing** ⭐ *New - Critical for microservices companies*
+  - `ProductContractTest.java`: 2-3 Pact consumer contract examples
+  - `docs/CONTRACT-TESTING.md`: Consumer-driven contracts explained
+  - Demonstrates microservices testing awareness (Google/Amazon/Shopify requirement)
+
+- [ ] **API Performance Testing**
+  - `APIPerformanceTest.java`: Response time assertions (<500ms)
+  - Basic load testing (5-10 concurrent requests)
+  - Performance SLA validation
+
 - [ ] **CI Optimization**
   - GitHub Actions matrix: Chrome & Firefox parallel jobs
   - Execution time reduction evidence in CI logs
-- [ ] **Scalability Documentation**
-  - README section: "Scaling Beyond 100 Tests"
-  - Infrastructure readiness notes (Docker/Grid awareness)
-  - Future-proofing strategy documentation
 
-**Goal**: Concrete performance engineering proof + senior-level interview talking points
+- [ ] **Scalability Documentation**
+  - `docs/PERFORMANCE-ENGINEERING.md`: Actual metrics with scalability projections
+  - README sections: "Scaling Beyond 100 Tests", "Infrastructure Strategy"
+  - Docker/Grid execution strategy for production scale
+
+**Goal**: Concrete performance engineering proof + microservices awareness for Senior/Staff SDET roles
 
 ---
 
@@ -337,22 +374,33 @@ This framework was built as part of a transition from manual QA (18 years) to te
 **Focus**: Interview-ready presentation and strategic positioning
 
 - [ ] **README Enhancement**
-  - Add "Performance Engineering" section with metrics
+  - Add "Infrastructure" section (Docker/Grid architecture with screenshots)
+  - Add "Performance Engineering" section with concrete metrics
   - Add "Scalability Strategy" section with parallel execution proof
+  - Add "Contract Testing" section (microservices awareness)
   - Add "Test Reliability" section with retry patterns
-- [ ] **Interview Preparation Assets**
-  - `docs/INTERVIEW-GUIDE.md` creation:
-    - Key architectural decisions explained
-    - Parallel execution deep-dive
-    - Flaky test handling war stories
-    - "What I'd do differently" reflections
+
+- [ ] **Strategic Documentation**
+  - `docs/MODERN-PATTERNS.md`:
+    - Contract testing ✅ (implemented)
+    - Observability ✅ (implemented)
+    - Visual regression awareness 📋 (future consideration)
+    - Accessibility testing awareness 📋 (future consideration)
+    - AI-assisted testing awareness 📋 (future consideration)
+  - `docs/FUTURE-MODERNIZATION.md`:
+    - Playwright evaluation (when to migrate)
+    - JUnit 5 migration path
+    - Kubernetes test execution strategy
+    - Shows strategic thinking beyond current implementation
+
 - [ ] **Code Quality Audit**
   - Remove dead/unused code
   - Ensure consistent naming conventions
+  - JavaDoc for public methods
   - Final Allure report screenshot refresh
   - Performance baseline documentation
 
-**Goal**: Portfolio optimized for Senior SDET interviews at top-tier tech companies
+**Goal**: Portfolio optimized for Senior/Staff SDET interviews at FAANG companies
 
 ---
 
