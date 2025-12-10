@@ -7,12 +7,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.net.URL;
 import java.time.Duration;
 
 /**
@@ -30,12 +32,24 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
+        // Execution mode: -Dexecution=local/grid (default: local)
+        String execution = System.getProperty("execution", "local").toLowerCase();
+
         // Browser selection via system property: -Dbrowser=chrome/firefox
         String browser = System.getProperty("browser", "chrome").toLowerCase();
 
         // Detect CI environment (GitHub Actions sets CI=true)
         boolean isCI = System.getenv("CI") != null;
 
+        // Grid execution mode
+        if ("grid".equals(execution)) {
+            setupGridDriver(browser);
+            System.out.println("🌐 Browser: " + browser + " (Grid)");
+            handleConsentPopup();
+            return;
+        }
+
+        // Local execution mode
         switch (browser) {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
@@ -71,7 +85,7 @@ public class BaseTest {
                 break;
         }
 
-        System.out.println("🌐 Browser: " + browser);
+        System.out.println("🌐 Browser: " + browser + " (Local)");
 
         // Handle consent popup if it appears
         handleConsentPopup();
@@ -118,6 +132,30 @@ public class BaseTest {
             ((JavascriptExecutor) driver).executeScript(
                     "document.querySelectorAll('.fc-dialog, .fc-dialog-overlay, .fc-consent-root').forEach(e => e.remove());"
             );
+        }
+    }
+
+    private void setupGridDriver(String browser) {
+        try {
+            String gridUrl = System.getProperty("grid.url", "http://localhost:4444");
+
+            switch (browser) {
+                case "firefox":
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    firefoxOptions.addPreference("dom.webnotifications.enabled", false);
+                    driver = new RemoteWebDriver(new URL(gridUrl), firefoxOptions);
+                    break;
+
+                case "chrome":
+                default:
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--disable-notifications");
+                    chromeOptions.addArguments("--start-maximized");
+                    driver = new RemoteWebDriver(new URL(gridUrl), chromeOptions);
+                    break;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to connect to Selenium Grid: " + e.getMessage(), e);
         }
     }
 }
