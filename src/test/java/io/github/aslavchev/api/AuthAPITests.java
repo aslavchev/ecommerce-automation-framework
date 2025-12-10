@@ -4,6 +4,7 @@ import io.github.aslavchev.api.base.BaseAPITest;
 import io.github.aslavchev.utils.TestConfig;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
@@ -15,6 +16,7 @@ import static org.hamcrest.Matchers.*;
  * API tests for Authentication endpoints.
  * Validates login verification with valid/invalid credentials and parameter validation.
  */
+@Listeners(io.github.aslavchev.listeners.RetryListener.class)
 public class AuthAPITests extends BaseAPITest {
 
     @Test(groups = {"api", "regression", "smoke"})
