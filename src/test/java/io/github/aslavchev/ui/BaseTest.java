@@ -100,7 +100,15 @@ public class BaseTest {
         }
 
         if (driver != null) {
-            driver.quit();
+            try {
+                driver.quit();
+            } catch (WebDriverException e) {
+                // Log but don't fail the test - driver cleanup issue
+                System.err.println("⚠️  WebDriver quit timeout: " + e.getMessage());
+                // Attempt to null out the driver reference anyway
+            } finally {
+                driver = null;
+            }
         }
     }
 

@@ -113,6 +113,8 @@ public class ProductsPage extends BasePage {
      */
     public void clickWomenCategory() {
         click(womenCategoryLocator);
+        // Wait for subcategories to expand
+        waitForElementVisible(womenDressSubcategoryLocator);
     }
 
     /**
@@ -170,6 +172,9 @@ public class ProductsPage extends BasePage {
     public ProductDetailsPage openFirstProductDetails() {
         removeAdOverlays();         // 1. remove ads
         removeGoogleAds();          // 2. remove google ads
+
+        // Wait for view buttons to be present
+        waitForElementVisible(viewProductButtonsLocator);
 
         List<WebElement> viewButtons = driver.findElements(viewProductButtonsLocator);
         if (!viewButtons.isEmpty()) {

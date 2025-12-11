@@ -31,6 +31,8 @@ public class ProductDetailsPage extends BasePage {
     }
 
     public boolean isProductDetailsVisible() {
+        // Wait for product details to load
+        waitForElementVisible(productNameLocator);
         return isElementDisplayed(productNameLocator) && isElementDisplayed(productPriceLocator);
     }
 
