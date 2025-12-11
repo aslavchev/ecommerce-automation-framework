@@ -19,7 +19,7 @@ public class TestDataReader {
      * CSV columns: testName, productName, cardName, cardNumber, cvc, expiryMonth, expiryYear
      * Returns: testName, productName, productPrice, cardName, cardNumber, cvc, expiryMonth, expiryYear (8 params)
      *
-     * @param csvFileName Name of CSV file in src/test/resources/testdata/
+     * @param csvFileName        Name of CSV file in src/test/resources/testdata/
      * @param productPriceLookup Function to get price for product name
      * @return 2D Object array for TestNG DataProvider
      * @throws RuntimeException if file not found or parsing fails
@@ -50,7 +50,7 @@ public class TestDataReader {
                     rows.add(new Object[]{testName, productName, productPrice, cardName, cardNumber, cvc, expiryMonth, expiryYear});
                 } else {
                     throw new IllegalArgumentException(
-                        "Invalid CSV row (expected 7 columns): " + line
+                            "Invalid CSV row (expected 7 columns): " + line
                     );
                 }
             }
@@ -84,5 +84,40 @@ public class TestDataReader {
         }
 
         return rows.stream().map(row -> new Object[]{row}).toArray(Object[][]::new);
+    }
+
+    /**
+     * Reads user data from CSV and returns UserData for matching email
+     * CSV columns: email, fullName, street, cityStatePostcode, country, phone
+     *
+     * @param email Email address to lookup
+     * @return UserData object with expected values for assertions
+     * @throws RuntimeException if email not found in CSV or file read fails
+     */
+    public static UserData getUserData(String email) {
+        String filePath = "src/test/resources/testdata/user-data.csv";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            br.readLine(); // Skip header
+
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                if (values.length == 6 && values[0].equals(email)) {
+                    return new UserData(
+                            values[0], // email
+                            values[1], // fullName
+                            values[2], // street
+                            values[3], // cityStatePostcode
+                            values[4], // country
+                            values[5]  // phone
+                    );
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read user-data.csv: " + filePath, e);
+        }
+
+        throw new RuntimeException("User not found in user-data.csv: " + email);
     }
 }

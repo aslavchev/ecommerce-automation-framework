@@ -4,20 +4,13 @@ import io.github.aslavchev.data.ProductDataProvider;
 import io.github.aslavchev.ui.pages.*;
 import io.github.aslavchev.utils.TestConfig;
 import io.github.aslavchev.utils.TestDataReader;
+import io.github.aslavchev.utils.UserData;
 import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class CheckoutTests extends BaseTest {
-    // ===== TEST DATA: EXPECTED ADDRESS VALUES =====
-    // (Matches TEST_USER account configured in .env)
-    private static final String EXPECTED_FULL_NAME = ". asl asl";
-    private static final String EXPECTED_STREET = "320 Pitt St,";
-    private static final String EXPECTED_CITY_STATE_POSTCODE = "Sydney NSW 2000";
-    private static final String EXPECTED_COUNTRY = "Australia";
-    private static final String EXPECTED_PHONE = "+61 111 222 333d";
-
     @Test(groups = {"e2e", "regression", "critical", "ui", "slow"}, dataProvider = "checkoutData")
     @Description("Test Case 16: Place Order: Login before Checkout (Data-Driven)")
     public void testPlaceOrderLogInBeforeCheckout(String testName,
@@ -32,6 +25,9 @@ public class CheckoutTests extends BaseTest {
         String email = TestConfig.email();
         String password = TestConfig.password();
         String expectedQuantity = "1";
+
+        // Load expected user data from CSV based on current user
+        UserData expectedUser = TestDataReader.getUserData(email);
 
         SoftAssert soft = new SoftAssert();
 
@@ -60,11 +56,11 @@ public class CheckoutTests extends BaseTest {
         String actualDeliveryCountry = checkoutPage.getDeliveryCountry();
         String actualDeliveryPhone = checkoutPage.getDeliveryPhone();
 
-        soft.assertEquals(actualDeliveryFullName, EXPECTED_FULL_NAME, "Delivery: Full Name");
-        soft.assertEquals(actualDeliveryStreet, EXPECTED_STREET, "Delivery: Street");
-        soft.assertEquals(actualDeliveryCityStatePostcode, EXPECTED_CITY_STATE_POSTCODE, "Delivery: City/State/Postcode");
-        soft.assertEquals(actualDeliveryCountry, EXPECTED_COUNTRY, "Delivery: Country");
-        soft.assertEquals(actualDeliveryPhone, EXPECTED_PHONE, "Delivery: Phone");
+        soft.assertEquals(actualDeliveryFullName, expectedUser.fullName, "Delivery: Full Name");
+        soft.assertEquals(actualDeliveryStreet, expectedUser.street, "Delivery: Street");
+        soft.assertEquals(actualDeliveryCityStatePostcode, expectedUser.cityStatePostcode, "Delivery: City/State/Postcode");
+        soft.assertEquals(actualDeliveryCountry, expectedUser.country, "Delivery: Country");
+        soft.assertEquals(actualDeliveryPhone, expectedUser.phone, "Delivery: Phone");
 
         // ===== ASSERT: VERIFY BILLING ADDRESS =====
         String actualBillingFullName = checkoutPage.getBillingFullName();
@@ -73,11 +69,11 @@ public class CheckoutTests extends BaseTest {
         String actualBillingCountry = checkoutPage.getBillingCountry();
         String actualBillingPhone = checkoutPage.getBillingPhone();
 
-        soft.assertEquals(actualBillingFullName, EXPECTED_FULL_NAME, "Billing: Full Name");
-        soft.assertEquals(actualBillingStreet, EXPECTED_STREET, "Billing: Street");
-        soft.assertEquals(actualBillingCityStatePostcode, EXPECTED_CITY_STATE_POSTCODE, "Billing: City/State/Postcode");
-        soft.assertEquals(actualBillingCountry, EXPECTED_COUNTRY, "Billing: Country");
-        soft.assertEquals(actualBillingPhone, EXPECTED_PHONE, "Billing: Phone");
+        soft.assertEquals(actualBillingFullName, expectedUser.fullName, "Billing: Full Name");
+        soft.assertEquals(actualBillingStreet, expectedUser.street, "Billing: Street");
+        soft.assertEquals(actualBillingCityStatePostcode, expectedUser.cityStatePostcode, "Billing: City/State/Postcode");
+        soft.assertEquals(actualBillingCountry, expectedUser.country, "Billing: Country");
+        soft.assertEquals(actualBillingPhone, expectedUser.phone, "Billing: Phone");
 
         // ===== ASSERT: VERIFY ORDER SUMMARY =====
         var names = checkoutPage.getProductNames();
