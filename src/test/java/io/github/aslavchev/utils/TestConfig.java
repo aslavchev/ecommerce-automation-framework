@@ -15,12 +15,31 @@ public class TestConfig {
             .ignoreIfMissing()
             .load();
 
-    /** Returns the test account email */
-    public static String email()    { return required("TEST_USER_EMAIL"); }
+    /**
+     * Returns the test account email - thread-safe for parallel execution
+     */
+    public static String email() {
+        int userId = getThreadUserId();
+        return required("TEST_USER_EMAIL_" + userId);
+    }
 
-    /** Returns the test account password */
-    public static String password() { return required("TEST_USER_PASSWORD"); }
 
+    /**
+     * Returns the test account password - thread-safe for parallel execution
+     */
+    public static String password() {
+        int userId = getThreadUserId();
+        return required("TEST_USER_PASSWORD_" + userId);
+    }
+
+    /**
+     * Returns user ID (1 or 2) based on thread ID
+     * Ensures each parallel thread gets a unique test user
+     */
+    private static int getThreadUserId() {
+        long threadId = Thread.currentThread().getId();
+        return (int) ((threadId % 2) + 1);  // Returns 1 or 2
+    }
 
     /**
      * Returns a required configuration value.

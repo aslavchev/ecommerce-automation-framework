@@ -25,8 +25,10 @@ jobs:
     - name: Run tests
       run: mvn clean test
       env:
-        TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
-        TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+        TEST_USER_EMAIL_1: ${{ secrets.TEST_USER_EMAIL_1 }}
+        TEST_USER_PASSWORD_1: ${{ secrets.TEST_USER_PASSWORD_1 }}
+        TEST_USER_EMAIL_2: ${{ secrets.TEST_USER_EMAIL_2 }}
+        TEST_USER_PASSWORD_2: ${{ secrets.TEST_USER_PASSWORD_2 }}
 
     - name: Generate Allure Report
       if: always()
