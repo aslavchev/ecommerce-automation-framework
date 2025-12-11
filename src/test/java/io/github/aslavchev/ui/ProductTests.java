@@ -1,6 +1,5 @@
 package io.github.aslavchev.ui;
 
-import io.github.aslavchev.base.BaseTest;
 import io.github.aslavchev.ui.pages.ProductDetailsPage;
 import io.github.aslavchev.ui.pages.ProductsPage;
 import io.qameta.allure.Description;

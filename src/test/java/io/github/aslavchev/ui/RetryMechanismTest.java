@@ -1,4 +1,4 @@
-package io.github.aslavchev.reliability;
+package io.github.aslavchev.ui;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

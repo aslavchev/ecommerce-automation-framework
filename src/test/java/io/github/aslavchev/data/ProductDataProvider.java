@@ -1,4 +1,4 @@
-package io.github.aslavchev.dataproviders;
+package io.github.aslavchev.data;
 
 import org.testng.annotations.DataProvider;
 

@@ -124,16 +124,15 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.4</version>
                 <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+                    <parallel>methods</parallel>
+                    <threadCount>4</threadCount>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>io.github.aslavchev.listeners.RetryListener</value>
+                            <value>io.qameta.allure.testng.AllureTestNg,io.github.aslavchev.listeners.RetryListener</value>
                         </property>
                     </properties>
                 </configuration>

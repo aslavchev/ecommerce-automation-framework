@@ -3,7 +3,6 @@ package io.github.aslavchev.api;
 import io.github.aslavchev.utils.TestDataReader;
 import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
-import io.github.aslavchev.api.base.BaseAPITest;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import java.util.Map;

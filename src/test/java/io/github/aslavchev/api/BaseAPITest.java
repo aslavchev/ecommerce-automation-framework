@@ -1,4 +1,4 @@
-package io.github.aslavchev.api.base;
+package io.github.aslavchev.api;
 
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;

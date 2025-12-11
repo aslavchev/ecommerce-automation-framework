@@ -1,7 +1,6 @@
-package io.github.aslavchev;
+package io.github.aslavchev.ui;
 
-import io.github.aslavchev.base.BaseTest;
-import io.github.aslavchev.dataproviders.ProductDataProvider;
+import io.github.aslavchev.data.ProductDataProvider;
 import io.github.aslavchev.ui.pages.*;
 import io.github.aslavchev.utils.TestConfig;
 import io.github.aslavchev.utils.TestDataReader;

@@ -1,6 +1,5 @@
 package io.github.aslavchev.api;
 
-import io.github.aslavchev.api.base.BaseAPITest;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;

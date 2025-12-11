@@ -159,9 +159,11 @@ src/
 │   ├── ui/pages/              # 8 Page Objects (Login, Products, Cart, Checkout)
 │   └── api/                   # APIHelper + REST Assured models
 └── test/java/io/github/aslavchev/
-    ├── ui/                    # 11 UI tests (data-driven)
-    ├── api/                   # 12 API tests (Products, Auth, Search)
-    └── base/BaseTest.java     # WebDriver setup + Grid support
+    ├── ui/                    # UI tests + BaseTest
+    ├── api/                   # API tests + BaseAPITest
+    ├── data/                  # DataProviders + CSV
+    ├── listeners/             # RetryListener
+    └── utils/                 # TestConfig, RetryAnalyzer
 
 docker-compose.yml             # Selenium Hub + Chrome/Firefox nodes
 docs/
@@ -169,27 +171,6 @@ docs/
 ├── DOCKER-SETUP.md           # Grid setup + troubleshooting
 └── TECH-STACK-RATIONALE.md   # Why Selenium? Why TestNG?
 ```
-
----
-
-## 🎓 What This Demonstrates
-
-### Production Engineering
-- ✅ Retry mechanism with flakiness tracking
-- ✅ Cross-browser testing (Chrome + Firefox)
-- ✅ Docker infrastructure-as-code
-- ✅ CI/CD with parallel execution
-- ✅ Observability: [Evaluated and consciously skipped](docs/architecture/ADR-012-observability-metrics.md) (Allure sufficient at 23-test scale)
-
-### Strategic Thinking
-- ✅ [Data-driven tech decisions](docs/TECH-STACK-RATIONALE.md) (Selenium: 56k companies, Playwright: 7k)
-- ✅ [Architecture Decision Records](docs/architecture/) documenting trade-offs
-- ✅ First principles: Knowing when NOT to code (ADR-012)
-
-### Clean Architecture
-- ✅ Page Object Model (no duplicate locators)
-- ✅ Test Pyramid compliance (60% API, 40% UI)
-- ✅ Data-driven testing (CSV-based scenarios)
 
 ---
 

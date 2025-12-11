@@ -1,4 +1,4 @@
-package io.github.aslavchev.base;
+package io.github.aslavchev.ui;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
