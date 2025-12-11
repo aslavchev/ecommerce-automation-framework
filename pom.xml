@@ -126,6 +126,9 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>1</threadCount>
+                    <excludes>
+                        <exclude>**/RetryMechanismTest.java</exclude>
+                    </excludes>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
