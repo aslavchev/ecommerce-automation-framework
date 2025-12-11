@@ -2,6 +2,8 @@ package io.github.aslavchev.ui;
 
 import io.github.aslavchev.ui.pages.LoginPage;
 import io.github.aslavchev.utils.TestConfig;
+import io.github.aslavchev.utils.TestDataReader;
+import io.github.aslavchev.utils.UserData;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 
@@ -24,8 +26,9 @@ public class LoginTests extends BaseTest {
                 .waitForLoginSuccess();
 
         // Assert
+        UserData expectedUser = TestDataReader.getUserData(email);
         assertTrue(loginPage.isLoggedIn());
-        assertEquals(loginPage.getLoggedInUsername(), "asl");
+        assertEquals(loginPage.getLoggedInUsername(), expectedUser.username);
     }
 
     @Test(groups = {"regression", "ui"})

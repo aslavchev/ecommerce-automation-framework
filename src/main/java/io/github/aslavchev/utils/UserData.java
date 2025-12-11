@@ -6,15 +6,17 @@ package io.github.aslavchev.utils;
  */
 public class UserData {
     public final String email;
+    public final String username;
     public final String fullName;
     public final String street;
     public final String cityStatePostcode;
     public final String country;
     public final String phone;
 
-    public UserData(String email, String fullName, String street,
+    public UserData(String email, String username, String fullName, String street,
                     String cityStatePostcode, String country, String phone) {
         this.email = email;
+        this.username = username;
         this.fullName = fullName;
         this.street = street;
         this.cityStatePostcode = cityStatePostcode;

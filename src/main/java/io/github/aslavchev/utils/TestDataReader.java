@@ -103,14 +103,15 @@ public class TestDataReader {
 
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if (values.length == 6 && values[0].equals(email)) {
+                if (values.length == 7 && values[0].equals(email)) {
                     return new UserData(
                             values[0], // email
-                            values[1], // fullName
-                            values[2], // street
-                            values[3], // cityStatePostcode
-                            values[4], // country
-                            values[5]  // phone
+                            values[1], // username
+                            values[2], // fullName
+                            values[3], // street
+                            values[4], // cityStatePostcode
+                            values[5], // country
+                            values[6]  // phone
                     );
                 }
             }
