@@ -125,7 +125,7 @@
                 <version>3.5.4</version>
                 <configuration>
                     <parallel>methods</parallel>
-                    <threadCount>2</threadCount>
+                    <threadCount>1</threadCount>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
