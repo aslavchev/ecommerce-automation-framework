@@ -124,3 +124,28 @@ assertTrue(loginPage.isLoggedIn());
 
 - [Selenium POM Documentation](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/)
 - [Martin Fowler - Page Object](https://martinfowler.com/bliki/PageObject.html)
+
+---
+
+## 🧒 ELI5 (Explain Like I'm 5)
+
+**The Problem**:
+Tests had the same locators copied everywhere, broke easily when the UI changed, and mixed test logic with browser commands making them unreadable.
+
+**The Options**:
+1. No pattern (raw Selenium) - Simple to start but creates immediate technical debt through duplication
+2. Page Factory (@FindBy) - Selenium's built-in pattern but lazy initialization causes unexpected behavior
+3. Screenplay Pattern - Advanced actor-based approach but over-engineering for a 25-test portfolio
+4. Page Object Model with BasePage - Industry standard with centralized wait logic
+
+**The Choice**:
+Page Object Model with BasePage abstraction to centralize locators and wait strategies.
+
+**Why This Matters**:
+When UI changes, update one page object file instead of hunting through dozens of test files. Team can read tests as business logic, not WebDriver commands.
+
+**The Trade-off**:
+More files upfront (extra abstraction layer) and team learning curve. We accepted this because 70% code reduction and flakiness elimination outweighed initial setup cost.
+
+**Key Takeaway**:
+"Chose Page Object Model over raw Selenium because centralizing locators and wait logic reduced code duplication by 70% and eliminated synchronization flakiness—worth the upfront abstraction overhead for long-term maintainability."

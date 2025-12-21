@@ -187,3 +187,28 @@ TEST_USER_PASSWORD
 - [Selenium Headless Chrome](https://www.selenium.dev/blog/2023/headless-is-going-away/)
 - [Test Pyramid - Martin Fowler](https://martinfowler.com/articles/practical-test-pyramid.html)
 - [Shift-Left Testing Guide](https://www.browserstack.com/guide/what-is-shift-left-testing)
+
+---
+
+## 🧒 ELI5 (Explain Like I'm 5)
+
+**The Problem**:
+With only 2 passing tests, needed to decide next priority: expand coverage to 10+ tests, add data-driven testing, implement API tests, or set up CI/CD automation. All paths were valid.
+
+**The Options**:
+1. Expand coverage first - More visible progress, comfortable path, but manual test execution continues
+2. Data-driven testing first - Advanced TestNG skills, but limited benefit with only 2 tests
+3. API testing first - Full-stack capability, but compounds manual execution problem
+4. CI/CD first - One-time setup (4-5 days), then every future test automatically validated
+
+**The Choice**:
+Implement GitHub Actions CI/CD pipeline in Week 3 before expanding test coverage.
+
+**Why This Matters**:
+Every test added after Week 3 automatically ran in clean CI environment without extra work. Avoided retrofitting CI/CD complexity later with 25+ tests. Demonstrates automation-first mindset used in production teams.
+
+**The Trade-off**:
+Spent 4-5 days on infrastructure with only 2 tests initially (looked like small progress). Accepted this because automation foundation enabled velocity for 8 subsequent weeks—one-time cost, permanent benefit.
+
+**Key Takeaway**:
+"Prioritized CI/CD automation in Week 3 with only 2 tests over expanding coverage first because establishing automated validation infrastructure early meant every future test was automatically validated—4-day investment enabled 8 weeks of velocity."

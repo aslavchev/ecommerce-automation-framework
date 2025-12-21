@@ -156,3 +156,28 @@ public void testCheckout(String testName, String productName, String price, ...)
 
 - [TestNG DataProvider Documentation](https://testng.org/doc/documentation-main.html#parameters-dataproviders)
 - Production code: [GitHub commit 5b89853](https://github.com/aslavchev/ecommerce-automation-framework/commit/5b89853)
+
+---
+
+## 🧒 ELI5 (Explain Like I'm 5)
+
+**The Problem**:
+Hardcoded test data meant creating duplicate test methods for each scenario (different products, payment details). QA team couldn't add test scenarios without touching code. Product data scattered across files.
+
+**The Options**:
+1. Separate CSV per test class - Simple but duplicates product catalog across every file
+2. Database-driven testing - Industry standard but requires DB setup/maintenance for 25 tests
+3. JSON files - Flexible but less accessible to non-developers than spreadsheets
+4. Centralized CSV with data enrichment - Shared product catalog, test-specific CSVs combined automatically
+
+**The Choice**:
+CSV-based architecture with centralized ProductDataProvider and automatic data enrichment.
+
+**Why This Matters**:
+QA team edits CSV files in Excel to add scenarios without code changes. Product price updates in one place automatically flow to all tests. Grew from 1 scenario to 3 for cart tests through simple CSV edits.
+
+**The Trade-off**:
+Added 4 new files (CSV + data provider classes) and CSV errors discovered at runtime instead of compile time. We accepted this because QA team autonomy and 200% scenario growth outweighed validation complexity.
+
+**Key Takeaway**:
+"Chose CSV-based data-driven testing with centralized product catalog over database-driven because simplicity and team accessibility mattered more than enterprise patterns—grew test scenarios 200% through QA team CSV edits without code changes."

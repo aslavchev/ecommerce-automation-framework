@@ -146,3 +146,28 @@ public void testPlaceOrderLogInBeforeCheckout() { ... }
 
 - [TestNG Groups Documentation](https://testng.org/doc/documentation-main.html#test-groups)
 - [Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/examples/testng.html)
+
+---
+
+## 🧒 ELI5 (Explain Like I'm 5)
+
+**The Problem**:
+Running all tests took 5-10 minutes—too slow for quick feedback during development. No way to run only critical paths before deployment or exclude slow E2E tests when iterating.
+
+**The Options**:
+1. TestNG Groups - Native TestNG feature, tests can belong to multiple groups, zero dependencies
+2. JUnit 5 Tags - Modern approach but requires migrating entire framework from TestNG
+3. Separate Suite XMLs - Clear separation but tests can't flexibly belong to multiple suites
+4. Maven Profiles - Complements groups but doesn't solve the test selection problem
+
+**The Choice**:
+TestNG groups to categorize tests by purpose (smoke, regression, critical) and speed (slow, fast).
+
+**Why This Matters**:
+Developers get feedback in 2 minutes (smoke) instead of 10 minutes (full suite). CI/CD runs only critical tests on PRs, saving pipeline time and catching deployment blockers faster.
+
+**The Trade-off**:
+Requires team discipline to tag tests consistently and document what each group means. We accepted this maintenance overhead because 60-80% faster feedback loops justify the tagging effort.
+
+**Key Takeaway**:
+"Implemented TestNG groups to reduce developer feedback from 10 minutes to 2 minutes by categorizing tests as smoke/regression/critical—60-80% faster iteration was worth the discipline of consistent tagging."
