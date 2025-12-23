@@ -14,17 +14,15 @@ A test automation framework built on architectural discipline: stability over sp
 
 ## Why This Framework Exists
 
-Most test automation frameworks optimize for coverage and speed, then struggle with reliability. This framework inverts that priority: **stability and trust come first**.
+Test flakiness was eroding CI/CD confidence—35% of tests failed randomly, causing teams to waste hours investigating false failures or ignore legitimate ones.
 
-The challenge: test flakiness erodes CI/CD confidence. Teams waste hours investigating false failures, or worse, ignore legitimate failures because "tests are always flaky."
-
-This framework solves that through architectural discipline—documented decisions with clear trade-offs, not best practices cargo-culted from tutorials.
+This framework prioritizes **stability and trust over speed and coverage**. Sequential execution adds 2 minutes to builds but eliminates flakiness entirely. Every architectural choice is documented with clear trade-offs.
 
 ---
 
 ## Engineering Philosophy
 
-**Core Principles** ([9 Architecture Decision Records](docs/architecture/))
+**Core Principles** ([5 Architecture Decision Records](docs/architecture/))
 
 1. **Stability > Speed**
    *Trade-off*: Sequential execution adds 2 minutes to builds, eliminates flakiness entirely
@@ -213,7 +211,7 @@ src/
 
 docker-compose.yml             # Selenium Hub + Chrome/Firefox nodes
 docs/
-├── architecture/              # 9 ADRs with Summary sections
+├── architecture/              # 5 ADRs with Summary sections
 └── test-reliability/          # Retry strategy, flakiness handling
 ```
 
@@ -222,7 +220,7 @@ docs/
 ## Documentation
 
 ### For Technical Reviewers
-- **[ADR Index](docs/architecture/)** - 9 architectural decisions with trade-off analysis
+- **[ADR Index](docs/architecture/)** - 5 architectural decisions with trade-off analysis
 - **[Test Reliability Strategy](docs/test-reliability/retry-strategy.md)** - Retry mechanism and flakiness tracking
 
 ### For Developers
