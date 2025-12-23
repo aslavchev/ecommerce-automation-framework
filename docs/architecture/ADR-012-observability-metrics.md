@@ -25,7 +25,6 @@ With Docker + Selenium Grid infrastructure complete (Phase 6.5 Part 1) and 23 te
 - Support distributed tracing across Grid nodes
 - Machine-readable JSON format for tooling integration
 - Minimal performance overhead
-- FAANG-level observability practices
 
 ---
 
@@ -78,12 +77,11 @@ With Docker + Selenium Grid infrastructure complete (Phase 6.5 Part 1) and 23 te
   - Industry-standard distributed tracing
   - Rich ecosystem (Jaeger, Prometheus, Grafana)
   - Excellent for microservices observability
-  - FAANG-level tooling
 - **Cons**:
   - Significant complexity for test framework scale
   - Requires backend infrastructure (collector, storage, visualization)
   - Steep learning curve
-  - Overkill for 23-test portfolio project
+  - Overkill for 23-test framework
 - **Why rejected**: Future consideration for large-scale implementations, too heavy for current scope
 
 ---
@@ -111,12 +109,10 @@ With Docker + Selenium Grid infrastructure complete (Phase 6.5 Part 1) and 23 te
 
 ### Supporting Factors
 
-- **Job Market Alignment**: SLF4J + Logback is standard in enterprise Java (90%+ adoption)
-- **Learning Value**: Demonstrates understanding of structured logging, observability patterns
-- **Portfolio Impact**: Shows production-ready thinking, not just "tests that pass"
+- **Industry Standard**: SLF4J + Logback widely adopted in enterprise Java environments
 - **Practical Feasibility**: 2-3 hours implementation, minimal complexity
 
-### FAANG Observability Principles
+### Observability Principles
 
 | Principle | Implementation |
 |-----------|----------------|
@@ -323,7 +319,7 @@ public void tearDown(ITestResult result) {
 - [SLF4J Manual](https://www.slf4j.org/manual.html)
 - [Logback Documentation](https://logback.qos.ch/documentation.html)
 - [Logstash Logback Encoder](https://github.com/logfellow/logstash-logback-encoder)
-- [FAANG Observability Best Practices](https://sre.google/workbook/monitoring/)
+- [Google SRE Workbook - Monitoring](https://sre.google/workbook/monitoring/)
 - [MDC (Mapped Diagnostic Context)](https://www.slf4j.org/api/org/slf4j/MDC.html)
 
 ---
@@ -346,7 +342,7 @@ With 23 tests running across Docker + Selenium Grid, no structured way to track 
 **The Options**:
 1. Continue with Log4j2 only - No new dependencies but security history concerns and less flexible JSON support
 2. Custom metrics framework - Full control over format but reinventing the wheel, more maintenance
-3. OpenTelemetry - Industry-standard distributed tracing but massive complexity for 23-test portfolio
+3. OpenTelemetry - Industry-standard distributed tracing but massive complexity for 23-test framework
 4. SLF4J + Logback - Industry-standard logging facade with native JSON support, right-sized for current scale
 
 **The Choice**:
