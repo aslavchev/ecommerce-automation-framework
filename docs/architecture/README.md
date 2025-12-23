@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-This directory contains Architecture Decision Records (ADRs) documenting key technical decisions for the test automation framework. Each ADR includes an ELI5 (Explain Like I'm 5) section for clarity and accessibility.
+This directory contains Architecture Decision Records (ADRs) documenting key technical decisions for the test automation framework. Each ADR includes a Summary section for clarity and accessibility.
 
 ## Index
 
@@ -57,7 +57,7 @@ Each ADR follows this format:
 3. **Rationale**: Why it was chosen
 4. **Alternatives Considered**: What else was evaluated (with rejection reasons)
 5. **Consequences**: Trade-offs and impacts
-6. **🧒 ELI5**: Plain-language explanation with problem, options, choice, impact, and trade-offs
+6. **Summary**: Plain-language explanation with problem, options, choice, impact, and trade-offs
 
 ## References
 

@@ -334,7 +334,7 @@ public void tearDown(ITestResult result) {
 
 ---
 
-## 🧒 ELI5 (Explain Like I'm 5)
+## Summary
 
 **The Problem**:
 With 23 tests running across Docker + Selenium Grid, no structured way to track test performance, identify slow tests, or analyze failure patterns. Manual analysis of Allure reports required. No machine-readable metrics for CI dashboards or trend analysis.

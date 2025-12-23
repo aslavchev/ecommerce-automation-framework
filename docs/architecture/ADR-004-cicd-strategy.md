@@ -190,7 +190,7 @@ TEST_USER_PASSWORD
 
 ---
 
-## 🧒 ELI5 (Explain Like I'm 5)
+## Summary
 
 **The Problem**:
 With only 2 passing tests, needed to decide next priority: expand coverage to 10+ tests, add data-driven testing, implement API tests, or set up CI/CD automation. All paths were valid.
@@ -205,7 +205,7 @@ With only 2 passing tests, needed to decide next priority: expand coverage to 10
 Implement GitHub Actions CI/CD pipeline in Week 3 before expanding test coverage.
 
 **Why This Matters**:
-Every test added after Week 3 automatically ran in clean CI environment without extra work. Avoided retrofitting CI/CD complexity later with 25+ tests. Demonstrates automation-first mindset used in production teams.
+Every test added after Week 3 automatically ran in clean CI environment without extra work. Avoided retrofitting CI/CD complexity later with 25+ tests. Automation-first approach: every future test validated automatically.
 
 **The Trade-off**:
 Spent 4-5 days on infrastructure with only 2 tests initially (looked like small progress). Accepted this because automation foundation enabled velocity for 8 subsequent weeks—one-time cost, permanent benefit.

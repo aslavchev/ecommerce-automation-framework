@@ -159,7 +159,7 @@ public void testCheckout(String testName, String productName, String price, ...)
 
 ---
 
-## 🧒 ELI5 (Explain Like I'm 5)
+## Summary
 
 **The Problem**:
 Hardcoded test data meant creating duplicate test methods for each scenario (different products, payment details). QA team couldn't add test scenarios without touching code. Product data scattered across files.

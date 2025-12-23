@@ -149,7 +149,7 @@ public void testPlaceOrderLogInBeforeCheckout() { ... }
 
 ---
 
-## 🧒 ELI5 (Explain Like I'm 5)
+## Summary
 
 **The Problem**:
 Running all tests took 5-10 minutes—too slow for quick feedback during development. No way to run only critical paths before deployment or exclude slow E2E tests when iterating.

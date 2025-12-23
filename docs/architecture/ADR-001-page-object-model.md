@@ -127,7 +127,7 @@ assertTrue(loginPage.isLoggedIn());
 
 ---
 
-## 🧒 ELI5 (Explain Like I'm 5)
+## Summary
 
 **The Problem**:
 Tests had the same locators copied everywhere, broke easily when the UI changed, and mixed test logic with browser commands making them unreadable.
