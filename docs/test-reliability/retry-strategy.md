@@ -52,9 +52,11 @@ When a test appears in the flakiness report:
    - App issue → File bug, disable test until fixed
    - Environment → Document, accept retry
 
-## Interview Talking Point
+## Design Philosophy
 
-> "I implemented retry as a tactical solution for environmental flakiness, but I track all retry events in a flakiness report. Any test that retries gets investigated for root cause. Retry is a band-aid, not a fix. The goal is zero flaky tests."
+Retry is a tactical solution for environmental flakiness, not a permanent fix. All retry events are tracked in flakiness reports for investigation. Any test requiring retry is analyzed for root cause - test issue, application bug, or legitimate environmental variance.
+
+**Goal**: Zero flaky tests in production suite.
 
 ## Metrics to Track
 
