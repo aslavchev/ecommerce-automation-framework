@@ -73,10 +73,10 @@ Stability in existing 25 tests > adding 80+ hours of flaky visual tests
 Prove stability and architectural discipline first, defer accessibility until targeting accessibility-focused employers
 
 ### Alternative Strategy
-**Available for future extension**: Documented in [extensions-roadmap.md](../docs/extensions-roadmap.md) as Phase 7
+**Available for future extension**: Can be implemented if needed
 - Can be added when applying to companies with accessibility focus
 - Foundation exists (Selenium + TestNG) for quick integration
-- Estimated effort: 4-6 hours to add when needed
+- Estimated effort: 4-6 hours to add when needed (axe-core, pa11y)
 
 ---
 
@@ -101,12 +101,10 @@ Prove architectural discipline (flakiness elimination, stability) before expandi
 Focus automation investment on demonstrating reliability patterns (retry mechanism, sequential execution) over performance metrics we can't control
 
 ### Alternative Strategy
-**Documented for production readiness**: Available as Phase 8 extension
+**Documented for production readiness**: Available for future implementation
 - API response time monitoring via Allure reports (basic observability exists)
 - Can add JMeter/Gatling when working with real production systems
 - Current focus: stability and trust metrics (100% pass rate, 0% flakiness)
-
-**See**: [extensions-roadmap.md](../docs/extensions-roadmap.md)
 
 ---
 
@@ -181,7 +179,7 @@ Decision framework:
 ## Related Documentation
 - [ADR-002: TestNG Groups for Test Selection](architecture/ADR-002-testng-groups.md)
 - [ADR-004: CI/CD-First Strategy](architecture/ADR-004-cicd-strategy.md)
-- [Extensions Roadmap](../docs/extensions-roadmap.md) - Deferred features (Phases 7-9)
+- [ADR-012: Observability & Metrics](architecture/ADR-012-observability-metrics.md) - Right-sizing for scale
 
 ---
 
